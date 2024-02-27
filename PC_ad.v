@@ -13,7 +13,7 @@ assign cout = (in1 & in2) | (sum & cin);
 endmodule
 
 
-module add_4 (Sum, Ovfl, A);
+module PC_ad (Sum, Ovfl, A);
 input [15:0] A; //Input values
 output [15:0] Sum; //sum output
 output Ovfl; //To indicate overflow
