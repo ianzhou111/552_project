@@ -26,9 +26,9 @@ module ALU(
     input [15:0]b,
     input [2:0] op,
     output reg [15:0]out,
-    output Z,
-    output V,
-    output N
+    output reg Z,
+    output reg V,
+    output reg N
 );
 
 
@@ -37,7 +37,7 @@ reg cin1,cin2,cin3;
 reg [3:0] a1,a2,a3,a4;
 reg [3:0] b1,b2,b3,b4;
 wire [15:0]sum;
-reg sub,Error;
+reg sub,V;
 
 
 reg [15:0] Shift_In; 	// This is the input data to perform shift operation on
@@ -59,7 +59,9 @@ always @* casex(op)
         cin2 = c2;
         cin3 = c3;
         out = sum;
-        Error = (a[15]^Bin[15]) ? 0 : (a[15] ^ sum[15]);
+        V = (a[15]^Bin[15]) ? 0 : (a[15] ^ sum[15]);
+        Z = ~(|out);
+        N = out[15];
         end 
 3'b001: begin 
         {a4,a3,a2,a1} = a;
@@ -69,7 +71,9 @@ always @* casex(op)
         cin3 = c3;
         sub = 1;
         out = sum;
-        Error = (a[15]^Bin[15]) ? 0 : (a[15] ^ sum[15]);
+        V = (a[15]^Bin[15]) ? 0 : (a[15] ^ sum[15]);
+        Z = ~(|out);
+        N = out[15];
         end 
 3'b011: begin 
         {a4,a3,a2,a1} = a;
@@ -80,7 +84,8 @@ always @* casex(op)
         red1 = {{4{c2}},sum[7:0]};
         red2 = {{4{c4}},sum[15:8]};
         out = {{4{reds[11]}},reds};
-        Error = 0;
+        V = 0;
+        Z = ~(|out);
         end 
 3'b111: begin 
         {a4,a3,a2,a1} = a;
@@ -88,18 +93,21 @@ always @* casex(op)
         cin1=0;
         cin2=0;
         cin3=0;
-        Error=0;
+        V=0;
         out = sum;
+        Z = ~(|out);
         end 
 3'b010: begin 
         out = a^b;
-        Error = 0;
+        V = 0;
+        Z = ~(|out);
         end 
 3'b1xx: begin 
         out = Shift_Out;
         Shift_In = a;
         Shift_Val = b[3:0];
         Mode = op[1:0];
+        Z = ~(|out);
         end 
 
 
@@ -124,7 +132,7 @@ assign reds[15:12] = {4{reds[11]}};
 Shifter shft(.Shift_Out(Shift_Out), .Shift_In(Shift_In), .Shift_Val(Shift_Val), .Mode(Mode));
 
 //overflow saturation for add and sub 
-assign out = (~op[2]&~op[1]&Error) ? (sum[15]?16'h7fff:16'h8000)
+assign out = (~op[2]&~op[1]&V) ? (sum[15]?16'h7fff:16'h8000)
             : sum;
 
 
