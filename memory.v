@@ -38,12 +38,13 @@ module memory1c (data_out, data_in, addr, enable, wr, clk, rst);
    input          wr;
    input          clk;
    input          rst;
-   wire [15:0]    data_out;
-   
+   wire [15:0]    data_out,test;
+
    reg [15:0]      mem [0:2**ADDR_WIDTH-1];
    reg            loaded;
    
-   assign         data_out = (enable & (~wr))? {mem[addr[ADDR_WIDTH-1 :1]]}: 0; //Read
+   assign test = mem[addr[ADDR_WIDTH-1 :1]];
+   assign data_out = (enable & (~wr))? {mem[addr[ADDR_WIDTH-1 :1]]}: 0; //Read
    initial begin
       loaded = 0;
    end
@@ -52,7 +53,7 @@ module memory1c (data_out, data_in, addr, enable, wr, clk, rst);
       if (rst) begin
          //load loadfile_all.img
          if (!loaded) begin
-            $readmemh("loadfile_all.img", mem);
+            $readmemh("test.img", mem);
             loaded = 1;
          end
           

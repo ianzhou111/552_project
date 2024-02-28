@@ -19,12 +19,13 @@ output [15:0] Sum; //sum output
 output Ovfl; //To indicate overflow
 
 wire [15:0] cout;
-assign B = B << 2;
+wire [15:0]B_shft;
+assign B_shft = B << 1;
 
 
-full_adder_1bit FA[15:0] (.in1(A), .in2(B), .cin({cout[14:0],1'b0}), .out(Sum), .cout(cout));
+full_adder_1bit FA[15:0] (.in1(A), .in2(B_shft), .cin({cout[14:0],1'b0}), .out(Sum), .cout(cout));
 
-assign Ovfl = (A[15] ^ B[15]) ? 0 : (A[15] ^ Sum[15]);
+assign Ovfl = (A[15] ^ B_shft[15]) ? 0 : (A[15] ^ Sum[15]);
 
 endmodule
 

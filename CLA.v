@@ -32,18 +32,18 @@ module ALU(
 );
 
 
-reg c1,c2,c3,c4;
+wire c1,c2,c3,c4;
 reg cin1,cin2,cin3;
 reg [3:0] a1,a2,a3,a4;
 reg [3:0] b1,b2,b3,b4;
 wire [15:0]sum;
-reg sub,V;
+reg sub;
 
 
 reg [15:0] Shift_In; 	// This is the input data to perform shift operation on
 reg [3:0] Shift_Val; 	// Shift amount (used to shift the input data)
 reg  [1:0] Mode; 		// 00 Shift left, 01 is shift right, 10 is rotate right 
-reg [15:0] Shift_Out; 	// Shifted output data
+wire [15:0] Shift_Out; 	// Shifted output data
 
 reg [11:0] red1,red2;
 wire [15:0] reds;
@@ -54,24 +54,25 @@ assign Bin = sub ? ~b : b;
 always @* casex(op)
 3'b000: begin 
         {a4,a3,a2,a1} = a;
-        {b4,b3,b2,b1} = b;
+        {b4,b3,b2,b1} = Bin;
         cin1 = c1;
         cin2 = c2;
         cin3 = c3;
-        out = sum;
+        sub = 0;
         V = (a[15]^Bin[15]) ? 0 : (a[15] ^ sum[15]);
+        out = V ? (sum[15]?16'h7fff:16'h8000) : sum;
         Z = ~(|out);
         N = out[15];
         end 
 3'b001: begin 
         {a4,a3,a2,a1} = a;
-        {b4,b3,b2,b1} = b;
+        {b4,b3,b2,b1} = Bin;
         cin1 = c1;
         cin2 = c2;
         cin3 = c3;
         sub = 1;
-        out = sum;
         V = (a[15]^Bin[15]) ? 0 : (a[15] ^ sum[15]);
+        out = V ? (sum[15]?16'h7fff:16'h8000) : sum;
         Z = ~(|out);
         N = out[15];
         end 
@@ -81,6 +82,7 @@ always @* casex(op)
         cin1 = c1;
         cin2 = 0;
         cin3 = c3;
+        sub = 0;
         red1 = {{4{c2}},sum[7:0]};
         red2 = {{4{c4}},sum[15:8]};
         out = {{4{reds[11]}},reds};
@@ -93,6 +95,7 @@ always @* casex(op)
         cin1=0;
         cin2=0;
         cin3=0;
+        sub = 0;
         V=0;
         out = sum;
         Z = ~(|out);
@@ -103,6 +106,7 @@ always @* casex(op)
         Z = ~(|out);
         end 
 3'b1xx: begin 
+        sub = 0;
         out = Shift_Out;
         Shift_In = a;
         Shift_Val = b[3:0];
@@ -130,10 +134,5 @@ assign reds[15:12] = {4{reds[11]}};
 
 
 Shifter shft(.Shift_Out(Shift_Out), .Shift_In(Shift_In), .Shift_Val(Shift_Val), .Mode(Mode));
-
-//overflow saturation for add and sub 
-assign out = (~op[2]&~op[1]&V) ? (sum[15]?16'h7fff:16'h8000)
-            : sum;
-
 
 endmodule

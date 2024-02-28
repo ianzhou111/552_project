@@ -1,4 +1,4 @@
-module br_control (input [2:0] condition, input [2:0] flags, output branch)
+module br_control (input [2:0] condition, input [2:0] flags, output reg branch);
 
 always @* case (condition)
 	3'b000 : begin

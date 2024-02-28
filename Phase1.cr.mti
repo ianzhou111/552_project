@@ -1,0 +1,108 @@
+/filespace/s/sskher/552/552_project/RegFile.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/RegFile.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module dff
+-- Compiling module ReadDecoder_4_16
+-- Compiling module WriteDecoder_4_16
+-- Compiling module BitCell
+-- Compiling module Register
+-- Compiling module RegisterFile
+
+Top level modules:
+	RegisterFile
+
+} {} {}} /filespace/s/sskher/552/552_project/PC_ad.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/PC_ad.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module full_adder_1bit
+-- Compiling module PC_ad
+
+Top level modules:
+	PC_ad
+
+} {} {}} /filespace/s/sskher/552/552_project/cpu.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/cpu.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module cpu
+
+Top level modules:
+	cpu
+
+} {} {}} /filespace/s/sskher/552/552_project/D-Flip-Flop.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/D-Flip-Flop.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module dff
+
+Top level modules:
+	dff
+
+} {} {}} /filespace/s/sskher/552/552_project/project-phase1-testbench.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/project-phase1-testbench.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module cpu_tb
+
+Top level modules:
+	cpu_tb
+
+} {} {}} /filespace/s/sskher/552/552_project/shifter.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/shifter.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module Shifter
+
+Top level modules:
+	Shifter
+
+} {} {}} /filespace/s/sskher/552/552_project/4bit_as.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/4bit_as.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module one_bit_adder
+-- Compiling module four_bit_adder
+
+Top level modules:
+	four_bit_adder
+
+} {} {}} /filespace/s/sskher/552/552_project/CLA.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/CLA.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module CLA_4bit
+-- Compiling module ALU
+
+Top level modules:
+	ALU
+
+} {} {}} /filespace/s/sskher/552/552_project/BR_ad.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/BR_ad.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module full_adder_1bit
+-- Compiling module BR_ad
+
+Top level modules:
+	BR_ad
+
+} {} {}} /filespace/s/sskher/552/552_project/adder_tb.sv {1 {vlog -work work -vopt -sv -stats=none /filespace/s/sskher/552/552_project/adder_tb.sv
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module adder_tb
+
+Top level modules:
+	adder_tb
+
+} {} {}} /filespace/s/sskher/552/552_project/control.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/control.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module control
+
+Top level modules:
+	control
+
+} {} {}} /filespace/s/sskher/552/552_project/memory.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/memory.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module memory1c
+
+Top level modules:
+	memory1c
+
+} {} {}} /filespace/s/sskher/552/552_project/PSA_16bits.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/PSA_16bits.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module PSA_16bit
+
+Top level modules:
+	PSA_16bit
+
+} {} {}} /filespace/s/sskher/552/552_project/br_control.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/br_control.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module br_control
+
+Top level modules:
+	br_control
+
+} {} {}}
