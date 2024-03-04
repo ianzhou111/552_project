@@ -91,18 +91,18 @@ QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 Top level modules:
 	memory1c
 
-} {} {}} /filespace/s/sskher/552/552_project/PSA_16bits.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/PSA_16bits.v
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module PSA_16bit
-
-Top level modules:
-	PSA_16bit
-
 } {} {}} /filespace/s/sskher/552/552_project/br_control.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/br_control.v
 QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 -- Compiling module br_control
 
 Top level modules:
 	br_control
+
+} {} {}} /filespace/s/sskher/552/552_project/PSA_16bits.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/PSA_16bits.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module PSA_16bit
+
+Top level modules:
+	PSA_16bit
 
 } {} {}}

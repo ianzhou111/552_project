@@ -18,7 +18,7 @@ always @* case (condition)
 	end
 
 	3'b100 : begin
-		branch = flags[0] | (~flags[2] & ~flags[0]);
+		branch = flags[2] | (~flags[2] & ~flags[0]);
 	end
 
 	3'b101 : begin
