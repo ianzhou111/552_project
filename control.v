@@ -138,7 +138,7 @@ always @* case (Opcode)
 		ALU2Mux = 1'b0;
 		addrCalc = 1'b0;
 		loadByteMux = 1'b1;
-		DstMux = 2'b10;
+		DstMux = 2'b00;
 		enableMem = 1'b0;
 		readWriteMem = 1'b0;
 		Zen = 1'b0;
@@ -151,7 +151,7 @@ always @* case (Opcode)
 		ALU2Mux = 1'b0;
 		addrCalc = 1'b0;
 		loadByteMux = 1'b1;
-		DstMux = 2'b10;
+		DstMux = 2'b00;
 		enableMem = 1'b0;
 		readWriteMem = 1'b0;
 		Zen = 1'b0;
