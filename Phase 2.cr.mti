@@ -29,6 +29,13 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	ALU
 
+} {} {}} I:/552/552_project/control.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/control.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module control
+
+Top level modules:
+	control
+
 } {} {}} I:/552/552_project/project-phase1-testbench.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/project-phase1-testbench.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 -- Compiling module cpu_tb
@@ -56,12 +63,7 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	PC_ad
 
-} {} {}} I:/552/552_project/cpu.v {0 {vlog -work work -vopt -stats=none I:/552/552_project/cpu.v
-Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
--- Compiling module cpu
-** Error: (vlog-13069) I:/552/552_project/cpu.v(133): near ";": syntax error, unexpected ';'.
-
-} {4.0 5.0} {}} I:/552/552_project/memory.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/memory.v
+} {} {}} I:/552/552_project/memory.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/memory.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 -- Compiling module memory1c
 
