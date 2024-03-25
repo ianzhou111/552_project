@@ -104,7 +104,7 @@ wire [15:0] Rs;
 assign Rs = FwdOp1XX ? EX_MEM_Result : (FwdOp1MX ? DstData : ID_EX_SrcData1);
 
 wire [15:0] Rt;
-assign Rt = FwdOp1XX ? EX_MEM_Result : (FwdOp1MX ? DstData : ID_EX_SrcData2);
+assign Rt = FwdOp2XX ? EX_MEM_Result : (FwdOp2MX ? DstData : ID_EX_SrcData2);
 
 
 
@@ -112,7 +112,7 @@ wire [15:0] Operand1;
 assign Operand1 = ID_EX_addrCalc ? (Rs & 16'hFFFE) : Rs;
 
 wire [15:0] Operand2;
-assign Operand2 = ID_EX_addrCalc ? {{11{ID_EX_Inst[3]}}, ID_EX_Inst[3:0], 1'b0} : (ID_EX_ALU2Mux?{12'h000, Inst[3:0]}:Rt);
+assign Operand2 = ID_EX_addrCalc ? {{11{ID_EX_Inst[3]}}, ID_EX_Inst[3:0], 1'b0} : (ID_EX_ALU2Mux ? {12'h000, ID_EX_Inst[3:0]}:Rt);
 
 
 ALU ALU (.op(ALUInstAdd ? 3'b000 : ID_EX_Inst[14:12]), .a(Operand1), .b(Operand2), .out(ALUOut), .Z(ZALU), .V(VALU), .N(NALU));

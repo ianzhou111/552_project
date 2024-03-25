@@ -70,6 +70,13 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	PC_ad
 
+} {} {}} I:/552/552_project/cpu.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/cpu.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module cpu
+
+Top level modules:
+	cpu
+
 } {} {}} I:/552/552_project/memory.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/memory.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 -- Compiling module memory1c
@@ -84,12 +91,12 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	dff
 
-} {} {}} I:/552/552_project/PSA_16bits.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/PSA_16bits.v
+} {} {}} I:/552/552_project/br_control.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/br_control.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
--- Compiling module PSA_16bit
+-- Compiling module br_control
 
 Top level modules:
-	PSA_16bit
+	br_control
 
 } {} {}} I:/552/552_project/2B_flop.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/2B_flop.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
@@ -98,12 +105,12 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	double_flop
 
-} {} {}} I:/552/552_project/br_control.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/br_control.v
+} {} {}} I:/552/552_project/PSA_16bits.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/PSA_16bits.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
--- Compiling module br_control
+-- Compiling module PSA_16bit
 
 Top level modules:
-	br_control
+	PSA_16bit
 
 } {} {}} I:/552/552_project/shifter.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/shifter.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021

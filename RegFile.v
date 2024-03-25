@@ -77,9 +77,9 @@ ReadDecoder_4_16 src2_dec (.RegId(SrcReg2), .Wordline(src2_sel));
 
 WriteDecoder_4_16 wrt_dec (.RegId(DstReg), .WriteReg(WriteReg), .Wordline(dst_sel));
 
-Register file [15:0] (.clk(clk), .rst(rst), .D(DstData), .WriteReg(dst_sel), .ReadEnable1(src1_sel), .ReadEnable2(src2_sel), .Bitline1(SrcData1), .Bitline2(SrcData2));
+Register file [15:0] (.clk(clk), .rst(rst), .D(DstData), .WriteReg(dst_sel), .ReadEnable1(src1_sel), .ReadEnable2(src2_sel), .Bitline1(reg_out1), .Bitline2(reg_out2));
 
-//assign SrcData1 = (WriteReg & (DstReg == SrcReg1)) ? DstData : reg_out1;
-//assign SrcData2 = (WriteReg & (DstReg == SrcReg2)) ? DstData : reg_out2;
+assign SrcData1 = (WriteReg & (DstReg == SrcReg1)) ? DstData : reg_out1;
+assign SrcData2 = (WriteReg & (DstReg == SrcReg2)) ? DstData : reg_out2;
 
 endmodule
