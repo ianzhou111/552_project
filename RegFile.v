@@ -43,7 +43,7 @@ wire [15:0] out;
 
 ReadDecoder_4_16 dec(.RegId(RegId), .Wordline(out));
 
-assign Wordline = { [15:1]out, 1'b0 } & {16{WriteReg}};
+assign Wordline = { out[15:1], 1'b0 } & {16{WriteReg}};
 endmodule
 
 module BitCell( input clk, input rst, input D, input WriteEnable, input ReadEnable1, input
