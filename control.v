@@ -1,4 +1,4 @@
-module control (input [3:0] Opcode, output reg WriteReg , output reg ALU2Mux, output reg addrCalc, output reg loadByteMux, output reg [1:0] DstMux, output reg enableMem, output reg readWriteMem, 
+module control (input [3:0] Opcode, output reg WriteReg , output reg ALU2Mux, output reg addrCalc, output reg loadByteMux, output reg DstMux, output reg enableMem, output reg readWriteMem, 
 output reg Zen, output reg Ven, output reg Nen);
 
 always @* case (Opcode)

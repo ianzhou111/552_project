@@ -29,12 +29,38 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	ALU
 
+} {} {}} I:/552/552_project/control.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/control.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module control
+
+Top level modules:
+	control
+
 } {} {}} I:/552/552_project/project-phase1-testbench.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/project-phase1-testbench.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 -- Compiling module cpu_tb
 
 Top level modules:
 	cpu_tb
+
+} {} {}} I:/552/552_project/project-phase2-testbench.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/project-phase2-testbench.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module cpu_ptb
+
+Top level modules:
+	cpu_ptb
+
+} {} {}} I:/552/552_project/RegFile.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/RegFile.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module dff
+-- Compiling module ReadDecoder_4_16
+-- Compiling module WriteDecoder_4_16
+-- Compiling module BitCell
+-- Compiling module Register
+-- Compiling module RegisterFile
+
+Top level modules:
+	RegisterFile
 
 } {} {}} I:/552/552_project/PC_ad.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/PC_ad.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
