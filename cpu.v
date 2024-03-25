@@ -18,8 +18,7 @@ wire enableMem;
 wire readWriteMem;
 wire ZALU, ZOut, VALU, Vout, NALU, Nout;
 wire Zen, Ven, Nen;
-wire stall;
-
+wire stall,tstall,count;
 
 wire [15:0] IF_ID_Inst, IF_ID_PC_inc; /*** DECODE ***/
 wire MEM_WB_WriteReg; /*** WRITEBACK ***/
@@ -52,10 +51,16 @@ BR_ad shift_and_add (.Sum(PC_br), .Ovfl(), .A(IF_ID_PC_inc), .B({{7{Inst[8]}}, I
 
 RegisterFile regFile (.clk(clk), .rst(rst), .SrcReg1(IF_ID_Inst[7:4]), .SrcReg2(loadByteMux ? IF_ID_Inst[11:8] : IF_ID_Inst[3:0]), .DstReg(IF_ID_Inst[11:8]), .WriteReg(MEM_WB_WriteReg), .DstData(DstData), .SrcData1(SrcData1), .SrcData2(SrcData2));
 
-//1st line is scenario of both rt and rs 
-assign stall = ((IF_ID_Inst[15:12]==4'b1000)&&(Inst[15:14]==2'b00|Inst[15:12]==4'b0111)&&(IF_ID_Inst[11:8]==Inst[7:4]|IF_ID_Inst[11:8]==Inst[3:0])) ? 1:
-                ((~Inst[15]|Inst[15]&~Inst[13]&Inst[12])&&IF_ID_Inst[11:8]==Inst[7:4]) ? 1:
+assign tstall = (ID_EX_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:12]==4'b1101)&&(ID_EX_Inst[11:8]==IF_ID_Inst[7:4])? 1://double stall
                 0;
+//1st line is scenario of both rt and rs 
+assign stall = ((ID_EX_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:14]==2'b00|IF_ID_Inst[15:12]==4'b0111)&&(ID_EX_Inst[11:8]==IF_ID_Inst[7:4]|ID_EX_Inst[11:8]==IF_ID_Inst[3:0])) ? 1:
+                ((ID_EX_Inst[15:12]==4'b1000)&&(~IF_ID_Inst[15]|ID_EX_Inst[15:12]==4'b1001)&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4]) ? 1:
+                ((EX_MEM_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:12]==4'b1001)&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4])? 1://branch with 1 cycle apart
+                :tstall|count ? 1://stall 
+                0;
+
+dff onebcount (.q(count), .d(tstall), .wen(1'b1), .clk(clk), .rst(rst));
 
 wire [15:0] Operand1;
 assign Operand1 = addrCalc ? (SrcData1 & 16'hFFFE) : SrcData1;
