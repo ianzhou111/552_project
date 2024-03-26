@@ -1,8 +1,7 @@
-# Compile of project-phase2-testbench.v was successful.
 vsim -voptargs=+acc work.cpu_ptb
 # vsim -voptargs="+acc" work.cpu_ptb 
-# Start time: 16:41:48 on Mar 25,2024
-# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Start time: 17:55:02 on Mar 25,2024
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
 # Loading work.cpu_ptb(fast)
 # Loading work.cpu(fast)
 # Loading work.PC_ad(fast)
@@ -23,21 +22,82 @@ vsim -voptargs=+acc work.cpu_ptb
 add wave -position insertpoint sim:/cpu_ptb/*
 # ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
 #           File in use by: sskher  Hostname: WIN-8004  ProcessID: 3516
-#           Attempting to use alternate WLF file "./wlft34zzwx".
+#           Attempting to use alternate WLF file "./wlft9yz6cf".
 # ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
-#           Using alternate file: ./wlft34zzwx
+#           Using alternate file: ./wlft9yz6cf
 add wave -position insertpoint sim:/cpu_ptb/DUT/*
 run -all
 # Hello world...simulation starting
 # See verilogsim.plog and verilogsim.ptrace for output
 # ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
-#    Time: 1705 ns  Iteration: 0  Instance: /cpu_ptb
+#    Time: 1905 ns  Iteration: 0  Instance: /cpu_ptb
 # Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
-# Compile of RegFile.v was successful.
+# Compile of cpu.v was successful.
+# Compile of project-phase2-testbench.v was successful.
+# 2 compiles, 0 failed with no errors.
 restart
 # Closing VCD file "dump.vcd"
 # ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
 # ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Error (suppressible): I:/552/552_project/project-phase2-testbench.v(153): (vopt-7063) Failed to find 'MEM_WB_enableMem' in hierarchical name 'DUT.MEM_WB_enableMem'.
+#         Region: cpu_ptb
+# ** Error (suppressible): I:/552/552_project/project-phase2-testbench.v(153): (vopt-7063) Failed to find 'MEM_WB_readWriteMem' in hierarchical name 'DUT.MEM_WB_readWriteMem'.
+#         Region: cpu_ptb
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=2, Warnings=0.
+vsim -voptargs=+acc work.cpu_ptb
+# vsim -voptargs="+acc" work.cpu_ptb 
+# Start time: 17:55:02 on Mar 25,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error (suppressible): I:/552/552_project/project-phase2-testbench.v(153): (vopt-7063) Failed to find 'MEM_WB_enableMem' in hierarchical name 'DUT.MEM_WB_enableMem'.
+#         Region: cpu_ptb
+# ** Error (suppressible): I:/552/552_project/project-phase2-testbench.v(153): (vopt-7063) Failed to find 'MEM_WB_readWriteMem' in hierarchical name 'DUT.MEM_WB_readWriteMem'.
+#         Region: cpu_ptb
+# Optimization failed
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=4, Warnings=0.
+# Error loading design
+# End time: 18:20:14 on Mar 25,2024, Elapsed time: 0:25:12
+# Errors: 4, Warnings: 1
+# Compile of project-phase2-testbench.v was successful.
+vsim -voptargs=+acc work.cpu_ptb
+# vsim -voptargs="+acc" work.cpu_ptb 
+# Start time: 18:20:56 on Mar 25,2024
+# ** Note: (vsim-3812) Design is being optimized...
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+add wave -position insertpoint sim:/cpu_ptb/*
+# ** Warning: (vsim-WLF-5000) WLF file currently in use: vsim.wlf
+#           File in use by: sskher  Hostname: WIN-8004  ProcessID: 3516
+#           Attempting to use alternate WLF file "./wlft2fmnws".
+# ** Warning: (vsim-WLF-5001) Could not open WLF file: vsim.wlf
+#           Using alternate file: ./wlft2fmnws
+add wave -position insertpoint sim:/cpu_ptb/DUT/*
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
+#    Time: 1905 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
+# Compile of cpu.v failed with 2 errors.
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
 # Loading work.cpu_ptb(fast)
 # Loading work.cpu(fast)
 # Loading work.PC_ad(fast)
@@ -59,7 +119,7 @@ run -all
 # Hello world...simulation starting
 # See verilogsim.plog and verilogsim.ptrace for output
 # ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
-#    Time: 1705 ns  Iteration: 0  Instance: /cpu_ptb
+#    Time: 1905 ns  Iteration: 0  Instance: /cpu_ptb
 # Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
 # Compile of cpu.v was successful.
 restart
@@ -87,7 +147,203 @@ run -all
 # Hello world...simulation starting
 # See verilogsim.plog and verilogsim.ptrace for output
 # ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
-#    Time: 1705 ns  Iteration: 0  Instance: /cpu_ptb
+#    Time: 1905 ns  Iteration: 0  Instance: /cpu_ptb
 # Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
-# End time: 17:05:20 on Mar 25,2024, Elapsed time: 0:23:32
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+# Compile of cpu.v was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# Compile of cpu.v was successful.
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
+#    Time: 2705 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+# Compile of cpu.v was successful.
+restart
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
+#    Time: 2705 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-8009) Loading existing optimized design _opt2
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
+#    Time: 2305 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
+# Compile of cpu.v was successful.
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : I:/552/552_project/project-phase2-testbench.v(123)
+#    Time: 2705 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at I:/552/552_project/project-phase2-testbench.v line 123
+# End time: 19:26:44 on Mar 25,2024, Elapsed time: 1:05:48
 # Errors: 0, Warnings: 1

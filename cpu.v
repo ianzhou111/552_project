@@ -24,7 +24,7 @@ wire stall,tstall,count;
 wire [15:0] IF_ID_Inst, IF_ID_PC_inc; /*** DECODE ***/
 wire MEM_WB_WriteReg; wire [15:0] MEM_WB_Result, MEM_WB_MemOut, MEM_WB_Inst; /*** WRITEBACK ***/
 wire [15:0] ID_EX_SrcData1, ID_EX_SrcData2, ID_EX_Inst, ID_EX_PC_inc; /*** EXECUTE ***/
-wire [15:0] EX_MEM_Result, EX_MEM_SrcData2, EX_MEM_Inst; /*** MEMORY ***/
+wire EX_MEM_WriteReg, EX_MEM_enableMem, EX_MEM_readWriteMem, EX_MEM_DstMux; wire [15:0] EX_MEM_Result, EX_MEM_SrcData2, EX_MEM_Inst; /*** MEMORY ***/
 
 
 wire rst;
@@ -39,7 +39,7 @@ assign PC_in = (BrMux[1] ? SrcData1 : (BrMux[0] ? PC_br : (&Inst[15:12])? PC_val
 
 assign BrMux = (IF_ID_Inst[15] & IF_ID_Inst[14] & ~IF_ID_Inst[13]) ? (branchValid ? (IF_ID_Inst[12] ? 2'b10 : 2'b01) : 2'b00) : 2'b00;
 
-Register PC ( .clk(clk), .rst(rst|branch), .D(PC_in), .WriteReg(1'b1), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(PC_val), .Bitline2());
+Register PC ( .clk(clk), .rst(rst), .D(PC_in), .WriteReg(~stall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(PC_val), .Bitline2());
 
 memory1c IMem (.data_out(Inst), .data_in(16'b0), .addr(PC_val), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(rst));
 
@@ -53,7 +53,7 @@ assign branch = BrMux[1] | BrMux[0];
 
 control cUnit (.Opcode(IF_ID_Inst[15:12]), .WriteReg(WriteReg), .ALU2Mux(ALU2Mux), .addrCalc(addrCalc), .loadByteMux(loadByteMux), .DstMux(DstMux), .enableMem(enableMem), .readWriteMem(readWriteMem), .Zen(Zen), .Ven(Ven), .Nen(Nen));
 
-BR_ad shift_and_add (.Sum(PC_br), .Ovfl(), .A(IF_ID_PC_inc), .B({{7{Inst[8]}}, Inst[8:0]}));
+BR_ad shift_and_add (.Sum(PC_br), .Ovfl(), .A(IF_ID_PC_inc), .B({{7{IF_ID_Inst[8]}}, IF_ID_Inst[8:0]}));
 
 RegisterFile regFile (.clk(clk), .rst(rst), .SrcReg1(IF_ID_Inst[7:4]), .SrcReg2(loadByteMux ? IF_ID_Inst[11:8] : IF_ID_Inst[3:0]), .DstReg(MEM_WB_Inst[11:8]), .WriteReg(MEM_WB_WriteReg), .DstData(DstData), .SrcData1(SrcData1), .SrcData2(SrcData2));
 
@@ -94,11 +94,11 @@ wire [3:0] ID_EX_Rt;
 assign ID_EX_Rt = ID_EX_loadByteMux ? ID_EX_Inst[11:8] : ID_EX_Inst[3:0];
 
 wire FwdOp1MX, FwdOp2MX, FwdOp1XX, FwdOp2XX;
-assign FwdOp1MX = (MEM_WB_Inst[11:8] == ID_EX_Inst[7:4]);
-assign FwdOp2MX = (MEM_WB_Inst[11:8] == ID_EX_Rt);
+assign FwdOp1MX = MEM_WB_WriteReg && (MEM_WB_Inst[11:8] == ID_EX_Inst[7:4]) && (MEM_WB_Inst[11:8] != 4'b0000);
+assign FwdOp2MX = MEM_WB_WriteReg && (MEM_WB_Inst[11:8] == ID_EX_Rt) & (MEM_WB_Inst[11:8] != 4'b0000);
 
-assign FwdOp1XX = (EX_MEM_Inst[11:8] == ID_EX_Inst[7:4]);
-assign FwdOp2XX = (EX_MEM_Inst[11:8] == ID_EX_Rt);
+assign FwdOp1XX = EX_MEM_WriteReg && (EX_MEM_Inst[11:8] == ID_EX_Inst[7:4]) && (EX_MEM_Inst[11:8] != 4'b0000);
+assign FwdOp2XX = EX_MEM_WriteReg && (EX_MEM_Inst[11:8] == ID_EX_Rt) && (EX_MEM_Inst[11:8] != 4'b0000);
 
 wire [15:0] Rs;
 assign Rs = FwdOp1XX ? EX_MEM_Result : (FwdOp1MX ? DstData : ID_EX_SrcData1);
@@ -132,7 +132,6 @@ dff V (.q(Vout), .d(VALU), .wen(ID_EX_Ven), .clk(clk), .rst(rst));
 dff N (.q(Nout), .d(NALU), .wen(ID_EX_Nen), .clk(clk), .rst(rst));
 
 /**** MEMORY ****/
-wire EX_MEM_WriteReg, EX_MEM_enableMem, EX_MEM_readWriteMem, EX_MEM_DstMux;
 
 dff EX_MEM_WriteRegR (.q(EX_MEM_WriteReg), .d(ID_EX_WriteReg), .wen(1'b1), .clk(clk), .rst(rst));
 dff EX_MEM_enableMemR (.q(EX_MEM_enableMem), .d(ID_EX_enableMem), .wen(1'b1), .clk(clk), .rst(rst));
@@ -147,7 +146,7 @@ Register EX_MEM_InstR ( .clk(clk), .rst(rst), .D(ID_EX_Inst), .WriteReg(1'b1), .
 wire FwdMM;
 assign FwdMM = (MEM_WB_Inst[15:12] == 4'b1000) ? ((MEM_WB_Inst[11:8] == EX_MEM_Inst[11:8]) ? 1'b1 : 1'b0) : 1'b0; // don't need to check if current M is store instruction since write to memory is only enabled for store instructions
 wire [15:0] MemIn;
-assign MemIn = FwdMM ? DstData : EX_MEM_SrcData2;
+assign MemIn = (FwdMM && (MEM_WB_Inst[11:8] != 4'b0000)) ? DstData : EX_MEM_SrcData2;
 
 
 memory1c DMem (.data_out(MemOut), .data_in(MemIn), .addr(EX_MEM_Result), .enable(EX_MEM_enableMem), .wr(EX_MEM_readWriteMem), .clk(clk), .rst(rst));
