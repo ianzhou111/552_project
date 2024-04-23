@@ -151,37 +151,14 @@ wire [15:0] MemIn;
 assign MemIn = (FwdMM && (MEM_WB_Inst[11:8] != 4'b0000)) ? DstData : EX_MEM_SrcData2;
 
 //memory1c DMem (.data_out(MemOut), .data_in(MemIn), .addr(EX_MEM_Result), .enable(EX_MEM_enableMem), .wr(EX_MEM_readWriteMem), .clk(clk), .rst(rst));
-wire write_data_array;
-wire MemDataValid;
-wire [15:0] BlockReadAdd;
-wire [15:0] MainMemAdd, MainMemOut;
-wire [127:0] blockEn;
-seven_decode SD(.in({EX_MEM_Result[9:4], cstallLast}), .out(blockEn));
-wire [7:0] wordEn;
-three_decode TD(.in(EX_MEM_Result[3:1]), .out(wordEn));
-wire writeDCache = (EX_MEM_readWriteMem & ~cstall) | write_data_array;
-DataArray DCache (.clk(clk), .rst(rst), .DataIn(write_data_array ? MainMemOut : MemIn), .Write(writeDCache), .BlockEnable(blockEn), .WordEnable(wordEn), .DataOut(MemOut));
-
-wire miss_detected, miss_detected1, miss_detected2;
-wire [7:0] DMetaIn, DMetaOut;
-assign cstall = ((EX_MEM_enableMem & ~((DMetaOut[7:2] == EX_MEM_Result[15:10]) & (DMetaOut[1]))) | fsm_busy);
-dff cstallLR (.q(cstallLast), .d(cstall), .wen(1'b1), .clk(clk), .rst(rst));
-assign miss_detected1 = cstall & cstallLast;
-dff miss_detectedR1 (.q(miss_detected2), .d(miss_detected1), .wen(1'b1), .clk(clk), .rst(rst));
-assign miss_detected = ~miss_detected2 & miss_detected1;
-
-//(EX_MEM_enableMem & (MetaOut[7:2] == EX_MEM_Result[15:10]) & (MetaOut[1])) //Cache hit!!
-MetaDataArray DMeta(.clk(clk), .rst(rst), .DataIn(DMetaIn), .Write(write_tag_array), .BlockEnable(blockEn), .DataOut(DMetaOut));
-assign DMetaIn = {EX_MEM_Result[15:10], 1'b1, 1'b0};
-
-
-wire MainMemWR;
-assign MainMemAdd = write_data_array ? BlockReadAdd : EX_MEM_Result;
-assign MainMemWR = fsm_busy ? 1'b0 : EX_MEM_readWriteMem;
-memory4c mainMem(.data_out(MainMemOut), .data_in(MemIn), .addr(MainMemAdd), .enable(EX_MEM_enableMem & ~cstall), .wr(MainMemWR), .clk(clk), .rst(rst), .data_valid(MemDataValid));
-
-cache_fill_FSM cacheFSM(.clk(clk), .rst_n(rst_n), .miss_detected(miss_detected), .miss_address(EX_MEM_Result), .fsm_busy(fsm_busy), .write_data_array(write_data_array),
-.write_tag_array(write_tag_array), .memory_address(BlockReadAdd), .memory_data_valid(MemDataValid));
+wire [15:0] DInCache, DWay1Out, DWay2Out;
+wire DWriteWay1, DWriteWay2;
+wire [6:0] DBlockEn;
+wire [7:0]
+six_decode(.in(EX_MEM_Result[9:4]), .out(DBlockEn));
+three_decode(.in(EX_MEM_Result[3:1]), .out(DWordEn));
+DataArray DCache1 (.clk(clk), .rst(rst), .DataIn(DInCache), .Write(DWriteWay1), .BlockEnable(DBlockEn), .WordEnable(DWordEn), .DataOut(DWay1Out));
+DataArray DCache2 (.clk(clk), .rst(rst), .DataIn(DInCache), .Write(DWriteWay2), .BlockEnable(DBlockEn), .WordEnable(DWordEn), .DataOut(DWay2Out));
 
 /**** WRITEBACK ****/
 
