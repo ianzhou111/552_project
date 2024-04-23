@@ -1,8 +1,8 @@
 ; vsim modelsim.ini file
 [Version]
-INIVersion = "QA Baseline: 2021.1 Beta - 4536908"
+INIVersion = "2023.2_1"
 
-; Copyright 1991-2020 Mentor Graphics Corporation
+; Copyright 1991-2023 Mentor Graphics Corporation
 ;
 ; All Rights Reserved.
 ;
@@ -56,11 +56,11 @@ mtiRnm = $MODEL_TECH/../rnm
 mtiOvm = $MODEL_TECH/../ovm-2.1.2
 mtiUvm = $MODEL_TECH/../uvm-1.1d
 mtiUPF = $MODEL_TECH/../upf_lib
+flcov_ce_lib = $MODEL_TECH/../flcov_ce_lib
 mtiPA  = $MODEL_TECH/../pa_lib
 floatfixlib = $MODEL_TECH/../floatfixlib
 mc2_lib = $MODEL_TECH/../mc2_lib
 flps_lib = $MODEL_TECH/../flps_lib
-osvvm = $MODEL_TECH/../osvvm
 
 ; added mapping for ADMS
 mgc_ams = $MODEL_TECH/../mgc_ams
@@ -70,89 +70,9 @@ ieee_env = $MODEL_TECH/../ieee_env
 ;verilog_psl_checkers = $MODEL_TECH/../verilog_psl_checkers // Source files only for this release
 ;mvc_lib = $MODEL_TECH/../mvc_lib
 infact = $MODEL_TECH/../infact
+vh_flcov_lib = $MODEL_TECH/../vh_flcov_lib
 vhdlopt_lib = $MODEL_TECH/../vhdlopt_lib
 vh_ux01v_lib = $MODEL_TECH/../vh_ux01v_lib
-
-; Altera Primitive libraries
-;
-; VHDL Section
-;
-altera_mf = $MODEL_TECH/../intel/vhdl/altera_mf
-altera = $MODEL_TECH/../intel/vhdl/altera
-altera_lnsim = $MODEL_TECH/../intel/vhdl/altera_lnsim
-lpm = $MODEL_TECH/../intel/vhdl/220model
-220model = $MODEL_TECH/../intel/vhdl/220model
-maxii = $MODEL_TECH/../intel/vhdl/maxii
-maxv = $MODEL_TECH/../intel/vhdl/maxv
-fiftyfivenm = $MODEL_TECH/../intel/vhdl/fiftyfivenm
-sgate = $MODEL_TECH/../intel/vhdl/sgate
-arriaii = $MODEL_TECH/../intel/vhdl/arriaii
-arriaii_hssi = $MODEL_TECH/../intel/vhdl/arriaii_hssi
-arriaii_pcie_hip = $MODEL_TECH/../intel/vhdl/arriaii_pcie_hip
-arriaiigz = $MODEL_TECH/../intel/vhdl/arriaiigz
-arriaiigz_hssi = $MODEL_TECH/../intel/vhdl/arriaiigz_hssi
-arriaiigz_pcie_hip = $MODEL_TECH/../intel/vhdl/arriaiigz_pcie_hip
-stratixiv = $MODEL_TECH/../intel/vhdl/stratixiv
-stratixiv_hssi = $MODEL_TECH/../intel/vhdl/stratixiv_hssi
-stratixiv_pcie_hip = $MODEL_TECH/../intel/vhdl/stratixiv_pcie_hip
-cycloneiv = $MODEL_TECH/../intel/vhdl/cycloneiv
-cycloneiv_hssi = $MODEL_TECH/../intel/vhdl/cycloneiv_hssi
-cycloneiv_pcie_hip = $MODEL_TECH/../intel/vhdl/cycloneiv_pcie_hip
-cycloneive = $MODEL_TECH/../intel/vhdl/cycloneive
-stratixv = $MODEL_TECH/../intel/vhdl/stratixv
-stratixv_hssi = $MODEL_TECH/../intel/vhdl/stratixv_hssi
-stratixv_pcie_hip = $MODEL_TECH/../intel/vhdl/stratixv_pcie_hip
-arriavgz = $MODEL_TECH/../intel/vhdl/arriavgz
-arriavgz_hssi = $MODEL_TECH/../intel/vhdl/arriavgz_hssi
-arriavgz_pcie_hip = $MODEL_TECH/../intel/vhdl/arriavgz_pcie_hip
-arriav = $MODEL_TECH/../intel/vhdl/arriav
-cyclonev = $MODEL_TECH/../intel/vhdl/cyclonev
-cyclonev_hssi = $MODEL_TECH/../intel/vhdl/cyclonev_hssi
-twentynm = $MODEL_TECH/../intel/vhdl/twentynm
-twentynm_hssi = $MODEL_TECH/../intel/vhdl/twentynm_hssi
-twentynm_hip = $MODEL_TECH/../intel/vhdl/twentynm_hip
-cyclone10lp = $MODEL_TECH/../intel/vhdl/cyclone10lp
-;
-; Verilog Section
-;
-altera_mf_ver = $MODEL_TECH/../intel/verilog/altera_mf
-altera_ver = $MODEL_TECH/../intel/verilog/altera
-altera_lnsim_ver = $MODEL_TECH/../intel/verilog/altera_lnsim
-lpm_ver = $MODEL_TECH/../intel/verilog/220model
-220model_ver = $MODEL_TECH/../intel/verilog/220model
-maxii_ver = $MODEL_TECH/../intel/verilog/maxii
-maxv_ver = $MODEL_TECH/../intel/verilog/maxv
-fiftyfivenm_ver = $MODEL_TECH/../intel/verilog/fiftyfivenm
-sgate_ver = $MODEL_TECH/../intel/verilog/sgate
-arriaii_ver = $MODEL_TECH/../intel/verilog/arriaii
-arriaii_hssi_ver = $MODEL_TECH/../intel/verilog/arriaii_hssi
-arriaii_pcie_hip_ver = $MODEL_TECH/../intel/verilog/arriaii_pcie_hip
-arriaiigz_ver = $MODEL_TECH/../intel/verilog/arriaiigz
-arriaiigz_hssi_ver = $MODEL_TECH/../intel/verilog/arriaiigz_hssi
-arriaiigz_pcie_hip_ver = $MODEL_TECH/../intel/verilog/arriaiigz_pcie_hip
-stratixiv_ver = $MODEL_TECH/../intel/verilog/stratixiv
-stratixiv_hssi_ver = $MODEL_TECH/../intel/verilog/stratixiv_hssi
-stratixiv_pcie_hip_ver = $MODEL_TECH/../intel/verilog/stratixiv_pcie_hip
-stratixv_ver = $MODEL_TECH/../intel/verilog/stratixv
-stratixv_hssi_ver = $MODEL_TECH/../intel/verilog/stratixv_hssi
-stratixv_pcie_hip_ver = $MODEL_TECH/../intel/verilog/stratixv_pcie_hip
-arriavgz_ver = $MODEL_TECH/../intel/verilog/arriavgz
-arriavgz_hssi_ver = $MODEL_TECH/../intel/verilog/arriavgz_hssi
-arriavgz_pcie_hip_ver = $MODEL_TECH/../intel/verilog/arriavgz_pcie_hip
-arriav_ver = $MODEL_TECH/../intel/verilog/arriav
-arriav_hssi_ver = $MODEL_TECH/../intel/verilog/arriav_hssi
-arriav_pcie_hip_ver = $MODEL_TECH/../intel/verilog/arriav_pcie_hip
-cyclonev_ver = $MODEL_TECH/../intel/verilog/cyclonev
-cyclonev_hssi_ver = $MODEL_TECH/../intel/verilog/cyclonev_hssi
-cyclonev_pcie_hip_ver = $MODEL_TECH/../intel/verilog/cyclonev_pcie_hip
-cycloneiv_ver = $MODEL_TECH/../intel/verilog/cycloneiv
-cycloneiv_hssi_ver = $MODEL_TECH/../intel/verilog/cycloneiv_hssi
-cycloneiv_pcie_hip_ver = $MODEL_TECH/../intel/verilog/cycloneiv_pcie_hip
-cycloneive_ver = $MODEL_TECH/../intel/verilog/cycloneive
-twentynm_ver = $MODEL_TECH/../intel/verilog/twentynm
-twentynm_hssi_ver = $MODEL_TECH/../intel/verilog/twentynm_hssi
-twentynm_hip_ver = $MODEL_TECH/../intel/verilog/twentynm_hip
-cyclone10lp_ver = $MODEL_TECH/../intel/verilog/cyclone10lp
 
 ; Automatically perform logical->physical mapping for physical libraries that
 ; appear in -L/-Lf options with filesystem path delimiters (e.g. '.' or '/').
@@ -559,6 +479,13 @@ Explicit = 1
 ; Add '-' to disable specific statistics. Default is [time,cmd,msg].
 ; Stats = time,cmd,msg
 
+; Check vlog plusargs.  Default is 0 (off).
+; The command line equivalent is -check_plusargs <number>.
+; 0 = Don't check plusargs (this is the default)
+; 1 = Warning on unrecognized plusarg
+; 2 = Error and exit on unrecognized plusarg
+; CheckPlusargs = 1
+
 ; Set the threshold for automatically identifying sparse Verilog memories.
 ; A memory with total size in bytes equal to or more than the sparse memory
 ; threshold gets marked as sparse automatically, unless specified otherwise
@@ -847,6 +774,13 @@ LibrarySearchPath = mtiAvm mtiRnm mtiOvm mtiUvm mtiUPF infact
 ; UseUvmc = 1
 
 [vopt]
+; Check vopt plusargs.  Default is 0 (off).
+; The command line equivalent is -check_plusargs <number>.
+; 0 = Don't check plusargs (this is the default)
+; 1 = Warning on unrecognized plusarg
+; 2 = Error and exit on unrecognized plusarg
+; CheckPlusargs = 1
+
 ; Turn on code coverage in vopt.  Default is off. 
 ; Coverage = sbceft
 
@@ -983,7 +917,7 @@ Resolution = ns
 UserTimeUnit = default
 
 ; Default run length
-RunLength = 1 us
+RunLength = 0 ns
 
 ; Maximum iterations that can be run without advancing simulation time
 IterationLimit = 10000000
@@ -1922,7 +1856,8 @@ OnFinish = ask
 ; CoverWeight = 2
 
 ; Check vsim plusargs.  Default is 0 (off).
-; 0 = Don't check plusargs
+; The command line equivalent is -check_plusargs <number>.
+; 0 = Don't check plusargs (this is the default)
 ; 1 = Warning on unrecognized plusarg
 ; 2 = Error and exit on unrecognized plusarg
 ; CheckPlusargs = 1
@@ -1947,7 +1882,7 @@ OnFinish = ask
 ;
 ; UndefSyms = off
 
-; Enable the support for checkpointing foreign C/C++ libraries.
+; Enable the support for automatically checkpointing foreign C/C++ libraries.
 ; The valid arguments are: 0, 1, 2 
 ;    0: off  (default)
 ;    1: on   (manually save/restore user shared library data)
@@ -1979,10 +1914,17 @@ OnFinish = ask
 
 ; Specify the maximum size that a random dynamic array or queue may be resized
 ; to by the solver. If the solver attempts to resize a dynamic array or queue
-; to a size greater than the specified limit, the solver will abort with an error.
-; The default value is 10000. The maximum value is 10000000. A value of 0 is
-; equivalent to specifying the maximum value.
-; SolveArrayResizeMax = 10000
+; to a size greater than the specified limit, an error will be issued and
+; randomize() will fail. The default value is 65535. A value of 0 disables the
+; resize check (i.e. no error will be issued regardless of size).
+; SolveArrayResizeMax = 65535
+
+; Specify the maximum size that a random dynamic array or queue may be resized
+; to by the solver without a warning. If the solver attempts to resize a dynamic
+; array or queue to a size greater than the specified limit, a warning will be
+; issued. The default value is 65535. A value of 0 disables the resize check
+; (i.e. no warning will be issued regardless of size).
+; SolveArrayResizeWarn = 65535
 
 ; Specify error message severity when randomize() and randomize(null) failures
 ; are detected.
@@ -2062,7 +2004,7 @@ OnFinish = ask
 
 ; Specify the alternative behavior during solver replay. Must be used when combined with -solvereplay switch.
 ; SolveReplayOpt=[+|-]<opt>[,[+|-]<opt>]*"
-' Valid <opt> settings:
+; Valid <opt> settings:
 ;    validate : toggle the checking of value changes of non-random variables involved in randomize(). (default is off)"
 ; SolveReplayOpt=validate
 
@@ -2070,7 +2012,6 @@ OnFinish = ask
 ; Valid options are:
 ;   cputime     - use CPU time instead of elapsed time (wall time) to measure performance data (default is off)
 ;   randsets    - enable detailed profiling of randsets (default is off)
-;   testgen     - generate testcases for profiled randsets (only when randsets option is enabled) (default is off)
 ; SolverFProf = [+|-]<option>[,[+|-]<option>*]
 
 ; Specify the maximum size of the solution graph generated by the BDD solver.
@@ -2091,9 +2032,6 @@ OnFinish = ask
 ; option is used to get the same random sequences during simulation as
 ; as a prior release. Only prior releases with the same major version
 ; as the current release are allowed.
-; NOTE: Only those random sequence changes due to solver optimizations are
-; reverted by this variable. Random sequence changes due to solver bugfixes
-; cannot be un-done.
 ; NOTE: This variable can be overridden with the vsim "-solverev" command
 ; line switch.
 ; Default value set to "" (no compatibility).
@@ -2145,9 +2083,12 @@ MvcHome = $QUESTA_MVC_HOME
 ;   extscan      - support values greater than 32 bit for string builtin methods (atohex, atobin, atooct, atoi)
 ;   fmtcap       - prints capital hex digits with %X/%H in display calls
 ;   iddp         - ignore DPI disable protocol check
+;   idlitres     - disable 'assignment-like' bit-width rules for 'dist' and 'inside' expressions
 ;   lfmt         - zero-pad data if '0' prefixes width in format specifier (e.g. "%04h")
 ;   noexptc      - ignore DPI export type name overloading check
+;   pathseed     - enable unique seeding of module instances based on hierarchical path name
 ;   realrand     - support randomize() with real variables and constraints (Default)
+;   softunique   - allow 'unique' constraint to be declared as 'soft'
 ; SvExtensions = [+|-]<extension>[,[+|-]<extension>*]
 
 ; Enable/disable non-LRM compliant SystemVerilog constrained-random language extensions.
@@ -2155,17 +2096,17 @@ MvcHome = $QUESTA_MVC_HOME
 ;   arraymode    - consider rand_mode of unpacked array field independently from its elements
 ;   deepcheck    - allow randomize(null) to recursively consider constraints from member rand class handles (Default)
 ;   funcback     - enable function backtracking (ACT only)
-;   genmodseedfix - enable LRM-compliant seeding of module/interface instances under for-generate blocks (Default)
-;   impvecindex  - inject constraints on random indices of 2-state vectors
 ;   nodist       - interpret 'dist' constraint as 'inside' (ACT only)
 ;   noorder      - ignore solve/before ordering constraints (ACT only)
-;   pathseed     - enable unique seeding of module instances based on hierarchical path name
+;   oobidx       - allow out-of-bounds value for an indexed-expression with random indices if indexed-expression yields a 2-state packed type
 ;   prerandfirst - execute all pre_randomize() functions before evaluating any constraints
 ;   promotedist  - promote priority of 'dist' constraint if LHS has no solve/before
 ;   purecheck    - suppress pre_randomize() and post_randomize() calls for randomize(null) 
+;   randcext     - allow 'randc' and other 'rand' variables to be solved in the same randset (Default)
 ;   randindex    - allow random index in constraint (Default)
 ;   randstruct   - consider all fields of unpacked structs as 'rand'
 ;   skew         - skew randomize results (ACT only)
+;   srandom      - interpret $srandom(seed) system task calls as equivalent process::self().srandom(seed) calls (Default)
 ;   strictstab   - strict random stability
 ; SvRandExtensions = [+|-]<extension>[,[+|-]<extension>*]
 
@@ -2232,7 +2173,6 @@ libhm = $MODEL_TECH/libhm.sl
 ; The format is: suppress = <CODE>,<msg number>,[<CODE>,<msg number>,...]
 ; Examples:
 suppress = 8780 ;an explanation can be had by running: verror 8780 
-;suppress = 12110 ; 
 ;   note = 3009
 ;   warning = 3033
 ;   error = 3010,3016
@@ -2304,36 +2244,36 @@ Project_Version = 6
 Project_DefaultLib = work
 Project_SortMethod = unused
 Project_Files_Count = 15
-Project_File_0 = I:/552/552_project/4bit_as.v
-Project_File_P_0 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708899688 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 1 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_1 = I:/552/552_project/adder_tb.sv
-Project_File_P_1 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708899688 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 2 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_2 = I:/552/552_project/BR_ad.v
-Project_File_P_2 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709078097 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 3 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_3 = I:/552/552_project/CLA.v
-Project_File_P_3 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709084725 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 5 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_4 = I:/552/552_project/control.v
-Project_File_P_4 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 folder {Top Level} last_compile 1711400861 cover_fsm 0 cover_branch 0 vlog_noload 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 6 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_5 = I:/552/552_project/project-phase2-testbench.v
-Project_File_P_5 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 last_compile 1711408850 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 11 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_6 = I:/552/552_project/RegFile.v
-Project_File_P_6 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 folder {Top Level} last_compile 1711403481 cover_fsm 0 cover_branch 0 vlog_noload 0 vlog_enable0In 0 cover_excludedefault 0 vlog_disableopt 0 cover_covercells 0 cover_optlevel 3 vlog_hazard 0 vlog_showsource 0 voptflow 1 ood 0 vlog_0InOptions {} toggle - vlog_options {} compile_to work vlog_upper 0 cover_noshort 0 compile_order 13 dont_compile 0 cover_expr 0 cover_stmt 0
-Project_File_7 = I:/552/552_project/PC_ad.v
-Project_File_P_7 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709069739 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 10 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_8 = I:/552/552_project/cpu.v
-Project_File_P_8 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711411782 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 7 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_9 = I:/552/552_project/memory.v
-Project_File_P_9 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709078122 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 9 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_10 = I:/552/552_project/D-Flip-Flop.v
-Project_File_P_10 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708885200 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 8 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_11 = I:/552/552_project/PSA_16bits.v
-Project_File_P_11 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708899688 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 12 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_12 = I:/552/552_project/2B_flop.v
-Project_File_P_12 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711228761 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 0 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_13 = I:/552/552_project/br_control.v
-Project_File_P_13 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709527146 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 4 cover_expr 0 dont_compile 0 cover_stmt 0
-Project_File_14 = I:/552/552_project/shifter.v
-Project_File_P_14 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709080863 cover_fsm 0 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 14 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_0 = /filespace/s/sskher/552/552_project/RegFile.v
+Project_File_P_0 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711403481 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 13 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_1 = /filespace/s/sskher/552/552_project/PC_ad.v
+Project_File_P_1 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709069739 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 10 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_2 = /filespace/s/sskher/552/552_project/cpu.v
+Project_File_P_2 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711411782 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 7 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_3 = /filespace/s/sskher/552/552_project/D-Flip-Flop.v
+Project_File_P_3 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708885200 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 8 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_4 = /filespace/s/sskher/552/552_project/2B_flop.v
+Project_File_P_4 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711228761 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 0 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_5 = /filespace/s/sskher/552/552_project/project-phase2-testbench.v
+Project_File_P_5 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711408850 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 11 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_6 = /filespace/s/sskher/552/552_project/shifter.v
+Project_File_P_6 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709080863 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 14 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_7 = /filespace/s/sskher/552/552_project/4bit_as.v
+Project_File_P_7 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708899688 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 1 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_8 = /filespace/s/sskher/552/552_project/adder_tb.sv
+Project_File_P_8 = cover_toggle 0 file_type systemverilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat SV vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708899688 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 2 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_9 = /filespace/s/sskher/552/552_project/BR_ad.v
+Project_File_P_9 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709078097 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 3 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_10 = /filespace/s/sskher/552/552_project/CLA.v
+Project_File_P_10 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709084725 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 5 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_11 = /filespace/s/sskher/552/552_project/control.v
+Project_File_P_11 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1711400861 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 6 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_12 = /filespace/s/sskher/552/552_project/memory.v
+Project_File_P_12 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709078122 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 9 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_13 = /filespace/s/sskher/552/552_project/PSA_16bits.v
+Project_File_P_13 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1708899688 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 12 cover_expr 0 dont_compile 0 cover_stmt 0
+Project_File_14 = /filespace/s/sskher/552/552_project/br_control.v
+Project_File_P_14 = cover_toggle 0 file_type verilog group_id 0 cover_exttoggle 0 cover_nofec 0 cover_cond 0 vlog_1995compat 0 vlog_nodebug 0 cover_fsm 0 cover_branch 0 vlog_noload 0 folder {Top Level} last_compile 1709527146 cover_excludedefault 0 vlog_enable0In 0 vlog_disableopt 0 cover_covercells 0 voptflow 1 vlog_showsource 0 vlog_hazard 0 cover_optlevel 3 toggle - vlog_0InOptions {} ood 0 cover_noshort 0 vlog_upper 0 compile_to work vlog_options {} compile_order 4 cover_expr 0 dont_compile 0 cover_stmt 0
 Project_Sim_Count = 0
 Project_Folder_Count = 0
 Echo_Compile_Output = 0
@@ -2381,5 +2321,5 @@ DEBUGDATABASE_DoubleClick = Edit
 DEBUGDATABASE_CustomDoubleClick = 
 DEBUGARCHIVE_DoubleClick = Edit
 DEBUGARCHIVE_CustomDoubleClick = 
-Project_Major_Version = 2021
+Project_Major_Version = 2023
 Project_Minor_Version = 2

@@ -1,7 +1,7 @@
 module seven_decode(
     input [6:0] in,
-    output [127:0] out
-)
+    output reg [127:0] out
+);
 
 always @(*) begin
     case (in)
