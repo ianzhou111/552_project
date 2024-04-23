@@ -42,6 +42,7 @@ assign BrMux = (IF_ID_Inst[15] & IF_ID_Inst[14] & ~IF_ID_Inst[13]) ? (branchVali
 
 Register PC ( .clk(clk), .rst(rst), .D(PC_in), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(PC_val), .Bitline2());
 
+
 memory1c IMem (.data_out(Inst), .data_in(16'b0), .addr(PC_val), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(rst));
 
 /**** DECODE ****/
