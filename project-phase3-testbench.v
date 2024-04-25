@@ -154,7 +154,7 @@ module cpu_ptb();
             $fclose(trace_file);
             $fclose(sim_log_file);
 	    #5;
-            $finish;
+            $stop();
          end 
       end
       
@@ -172,7 +172,7 @@ module cpu_ptb();
    // Is processor halted (1 bit signal)
    
 
-   assign Inst = DUT.EX_MEM_Inst;
+   assign Inst = DUT.Inst;
    //Instruction fetched in the current cycle in MEMEMEM
    
    assign RegWrite = DUT.MEM_WB_WriteReg;

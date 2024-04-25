@@ -47,8 +47,8 @@ memory1c IMem (.data_out(Inst), .data_in(16'b0), .addr(PC_val), .enable(1'b1), .
 
 /**** DECODE ****/
 
-Register IF_ID_InstR ( .clk(clk), .rst(rst | branch), .D(Inst), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_Inst), .Bitline2());
-Register IF_ID_PC_incR ( .clk(clk), .rst(rst | branch), .D(PC_inc), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_PC_inc), .Bitline2());
+Register IF_ID_InstR ( .clk(clk), .rst(rst | (branch & ~stall)), .D(Inst), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_Inst), .Bitline2());
+Register IF_ID_PC_incR ( .clk(clk), .rst(rst | (branch & ~stall)), .D(PC_inc), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_PC_inc), .Bitline2());
 
 br_control bcUnit (.condition(IF_ID_Inst[11:9]), .flags({ZOut, Vout, Nout}), .branch(branchValid));
 assign branch = BrMux[1] | BrMux[0];
@@ -61,10 +61,14 @@ RegisterFile regFile (.clk(clk), .rst(rst), .SrcReg1(IF_ID_Inst[7:4]), .SrcReg2(
 
 assign tstall = (ID_EX_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:12]==4'b1101)&&(ID_EX_Inst[11:8]==IF_ID_Inst[7:4])? 1://double stall
                 0;
+                //add tstall for load to save
 //1st line is scenario of both rt and rs 
 assign stall = ((ID_EX_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:14]==2'b00|IF_ID_Inst[15:12]==4'b0111)&&(ID_EX_Inst[11:8]==IF_ID_Inst[7:4]|ID_EX_Inst[11:8]==IF_ID_Inst[3:0])) ? 1: // load to use for normal arithmetic instruction
-                ((ID_EX_Inst[15:12]==4'b1000)&&(~IF_ID_Inst[15]|ID_EX_Inst[15:12]==4'b1001)&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4]) ? 1: // load to use for instructions with immediate operands
-                ((EX_MEM_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:12]==4'b1001)&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4])? 1://branch with 1 cycle apart
+                //((ID_EX_Inst[15:12]==4'b1000)&&(~IF_ID_Inst[15]|ID_EX_Inst[15:12]==4'b1001)&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4]) ? 1: // load to use for instructions with immediate operands
+                ((ID_EX_Inst[15:12]==4'b1000)&&(~IF_ID_Inst[15])&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4]) ? 1: // load to use for instructions with immediate operands
+                //((EX_MEM_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:12]==4'b1001)&&ID_EX_Inst[11:8]==IF_ID_Inst[7:4])? 1://branch with 1 cycle apart
+                ((EX_MEM_Inst[15:12]==4'b1000)&&(IF_ID_Inst[15:12]==4'b1001)&&EX_MEM_Inst[11:8]==IF_ID_Inst[11:8])? 1://load to save with one cycle in between
+                ((ID_EX_Inst[15:12]==4'b0000 || ID_EX_Inst[15:12]==4'b0001 || ID_EX_Inst[15:12]==4'b0010 || ID_EX_Inst[15:12]==4'b0100 || ID_EX_Inst[15:12]==4'b0101 || ID_EX_Inst[15:12]==4'b0110)&&(ID_EX_Inst!=16'h0000)&&(IF_ID_Inst[15:12]==4'b1100 || IF_ID_Inst[15:12]==4'b1101))? 1://stall branch to let flag registers update
                 tstall|count ? 1://stall 2 cycles for L followed immediately by BR
                 0;
 
@@ -194,7 +198,7 @@ assign matchWay = (Way1TagMatch) ? 1'b0 : 1'b1;
 assign way = fsm_busy ? ~(~validWay1 | (validWay1 & LRUWay1 & validWay2)): matchWay;
 wire [7:0] DCacheWord;
 wire [127:0] DCBlockEn;
-wire [15:0] mainMemOut, mainMemIn, mainMemAdd, DCacheIn;			/* VVV If writing from main mem we have to write to the block being evicted */
+wire [15:0] mainMemOut, mainMemIn, mainMemAdd, DCacheIn;
 seven_decode SeD (.in({EX_MEM_Result[9:4], way}), .out(DCBlockEn));
 assign DCacheWrite = fsm_busy | (EX_MEM_readWriteMem & ~miss_detected1);
 assign DCacheWord = fsm_busy ? DMainWordEn : DWordEn;
@@ -216,12 +220,14 @@ memory4c mainMem (.data_out(mainMemOut), .data_in(mainMemIn), .addr(mainMemAdd),
 
 wire MEM_WB_DstMux;
 
-dff MEM_WB_WriteRegR (.q(MEM_WB_WriteReg), .d(EX_MEM_WriteReg), .wen(1'b1), .clk(clk), .rst(rst | cstall));
-dff MEM_WB_DstMuxR (.q(MEM_WB_DstMux), .d(EX_MEM_DstMux), .wen(1'b1), .clk(clk), .rst(rst | cstall));
+dff MEM_WB_WriteRegR (.q(MEM_WB_WriteReg), .d(EX_MEM_WriteReg), .wen(~cstall), .clk(clk), .rst(rst));
+dff MEM_WB_DstMuxR (.q(MEM_WB_DstMux), .d(EX_MEM_DstMux), .wen(~cstall), .clk(clk), .rst(rst)); 
+//Don't want to flush WB on cstall because it breaks MX forwarding; shouldn't matter because cstall only happens on LW or SW
+//SW doesn't do anything in WB and LW writes will be overwritten once we stop cstalling anyways
 
-Register MEM_WB_ResultR ( .clk(clk), .rst(rst | cstall), .D(EX_MEM_Result), .WriteReg(1'b1), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(MEM_WB_Result), .Bitline2());
-Register MEM_WB_MemOutR ( .clk(clk), .rst(rst | cstall), .D(MemOut), .WriteReg(1'b1), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(MEM_WB_MemOut), .Bitline2());
-Register MEM_WB_InstR ( .clk(clk), .rst(rst | cstall), .D(EX_MEM_Inst), .WriteReg(1'b1), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(MEM_WB_Inst), .Bitline2());
+Register MEM_WB_ResultR ( .clk(clk), .rst(rst), .D(EX_MEM_Result), .WriteReg(~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(MEM_WB_Result), .Bitline2());
+Register MEM_WB_MemOutR ( .clk(clk), .rst(rst), .D(MemOut), .WriteReg(~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(MEM_WB_MemOut), .Bitline2());
+Register MEM_WB_InstR ( .clk(clk), .rst(rst), .D(EX_MEM_Inst), .WriteReg(~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(MEM_WB_Inst), .Bitline2());
 
 //assign DstData = DstMux[1] ? (Inst[12] ? {Inst[7:0], SrcData2[7:0]} : {SrcData2[15:8], Inst[7:0]}) : (DstMux[0] ? MemOut : ALUOut);
 assign DstData = (MEM_WB_DstMux) ? MEM_WB_MemOut : MEM_WB_Result;
