@@ -52,9 +52,11 @@ Register PC ( .clk(clk), .rst(rst), .D(PC_in), .WriteReg(~stall & ~cstall & ~Ics
 wire [7:0] IInMeta1, IInMeta2, IWay1Out, IWay2Out;
 wire IWriteWay1, IWriteWay2;
 wire [63:0] IBlockEn;
+wire [7:0] IPCWordEn;
 wire [7:0] IMainWordEn;
 wire Iwrite_data_array, Iwrite_tag_array;
 six_decode ISD (.in(PC_val[9:4]), .out(IBlockEn));
+three_decode ITD1 (.in(PC_val[3:1]), .out(IPCWordEn));
 three_decode ITD2 (.in(IcurrBlockAdd[3:1]), .out(IMainWordEn));
 
 wire IvalidWay1, IvalidWay2, ILRUWay1;
@@ -94,10 +96,18 @@ wire [7:0] ICacheWord;
 wire [127:0] ICBlockEn;
 wire [15:0] ICacheIn;
 seven_decode ISeD (.in({PC_val[9:4], Iway}), .out(ICBlockEn));
-assign ICacheWrite = Ifsm_busy;
-assign ICacheWord = IMainWordEn;
+assign ICacheWrite = Iwrite_data_array;
+assign ICacheWord = Ifsm_busy ? IMainWordEn : IPCWordEn;
 assign ICacheIn = mainMemOut;
-DataArray ICache (.clk(clk), .rst(rst), .DataIn(ICacheIn), .Write(ICacheWrite), .BlockEnable(ICBlockEn), .WordEnable(ICacheWord), .DataOut(Inst));
+
+wire [127:0] ICBlockEnDel;
+dff ICBlockEnDelR [127:0] (.q(ICBlockEnDel), .d(ICBlockEn), .wen(1'b1), .clk(clk), .rst(rst));
+wire ICacheWriteDel;
+dff ICacheWriteDelR (.q(ICacheWriteDel), .d(ICacheWrite), .wen(1'b1), .clk(clk), .rst(rst));
+wire [7:0] ICacheWordDel;
+dff ICacheWordDelR [7:0] (.q(ICacheWordDel), .d(ICacheWord), .wen(1'b1), .clk(clk), .rst(rst));
+
+DataArray ICache (.clk(clk), .rst(rst), .DataIn(ICacheIn), .Write(Ifsm_busy? ICacheWriteDel: ICacheWrite), .BlockEnable(ICBlockEnDel), .WordEnable(Ifsm_busy ? ICacheWordDel: ICacheWord), .DataOut(Inst));
 
 cache_fill_FSM IcacheFSM(.clk(clk), .rst_n(rst_n), .miss_detected(Imiss_detected), .miss_address(PC_val), .fsm_busy(Ifsm_busy), .write_data_array(Iwrite_data_array),
 .write_tag_array(Iwrite_tag_array), .memory_address(IcurrBlockAdd), .memory_data_valid(memory_data_valid), .memBusy(sameCycleMiss));
@@ -255,7 +265,7 @@ wire [7:0] DCacheWord;
 wire [127:0] DCBlockEn;
 wire [15:0] mainMemIn, mainMemAdd, DCacheIn;
 seven_decode SeD (.in({EX_MEM_Result[9:4], way}), .out(DCBlockEn));
-assign DCacheWrite = fsm_busy | (EX_MEM_readWriteMem & ~miss_detected1);
+assign DCacheWrite = write_data_array | (EX_MEM_readWriteMem & ~miss_detected1);
 assign DCacheWord = fsm_busy ? DMainWordEn : DWordEn;
 assign DCacheIn = fsm_busy ? mainMemOut : MemIn;
 DataArray DCache (.clk(clk), .rst(rst), .DataIn(DCacheIn), .Write(DCacheWrite), .BlockEnable(DCBlockEn), .WordEnable(DCacheWord), .DataOut(MemOut));

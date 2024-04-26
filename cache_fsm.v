@@ -90,7 +90,7 @@ assign write_data_array = state;
 assign write_tag_arrayIn = ~stateIn & state;
 dff tagSigDelay (.q(write_tag_array), .d(write_tag_arrayIn), .wen(1'b1), .clk(clk), .rst(~rst_n));
 
-assign addEn = count[1] & count[0] & state & memory_data_valid & ~memBusy;
+assign addEn = count[1] & count[0] & state & ~memBusy;
 assign addIn = miss_detected ? (miss_address & 16'hFFF0) : addInc;
 
 endmodule

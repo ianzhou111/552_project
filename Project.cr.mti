@@ -70,6 +70,16 @@ QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 Top level modules:
 	cpu
 
+} {} {}} I:/552/552_project/DataArray.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/DataArray.v
+Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
+-- Compiling module DataArray
+-- Compiling module Block
+-- Compiling module DWord
+-- Compiling module DCell
+
+Top level modules:
+	DataArray
+
 } {} {}} /filespace/s/sskher/552/552_project/MetaDataArray.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/MetaDataArray.v
 QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 -- Compiling module MetaDataArray
@@ -96,16 +106,6 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 
 Top level modules:
 	control
-
-} {} {}} I:/552/552_project/DataArray.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/DataArray.v
-Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
--- Compiling module DataArray
--- Compiling module Block
--- Compiling module DWord
--- Compiling module DCell
-
-Top level modules:
-	DataArray
 
 } {} {}} /filespace/s/sskher/552/552_project/D-Flip-Flop.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/D-Flip-Flop.v
 QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
@@ -271,6 +271,13 @@ QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 
 Top level modules:
 	DataArray
+
+} {} {}} /filespace/s/sskher/552/552_project/memory.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/memory.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module memory1c
+
+Top level modules:
+	memory1c
 
 } {} {}} /filespace/s/sskher/552/552_project/control.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/control.v
 QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023

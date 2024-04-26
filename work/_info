@@ -85,6 +85,36 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 R1
 R0
 R1
@@ -232,10 +262,10 @@ R1
 cModel Technology
 Z3 dC:/Users/aimis/CS_ECE_files/552
 T_opt
-!s110 1714093121
-VLUdXQ<6PkG49olWYi3=<O3
+!s110 1714100865
+V[G<1iN`n?8UAdRQ:m`@K12
 04 7 4 work cpu_ptb fast 0
-=11-000ae431a4f1-662afc41-1eb72-a9831
+=35-000ae431a4f1-662b1a80-d31db-bc30c
 R1
 !s12b OEM100
 !s124 OEM100
@@ -375,24 +405,24 @@ R5
 n@bit@cell
 vBlock
 Z38 2/filespace/s/sskher/552/552_project/DataArray.v
-R23
+Z39 !s110 1714096852
 !i10b 1
 !s100 9_OEHb:AegHE0n6jc1>M51
 I;GeT[nQ9mLbT`VDjg_S@81
 R17
-Z39 w1713920941
-Z40 8/filespace/s/sskher/552/552_project/DataArray.v
-Z41 F/filespace/s/sskher/552/552_project/DataArray.v
-!i122 594
+Z40 w1714096836
+Z41 8/filespace/s/sskher/552/552_project/DataArray.v
+Z42 F/filespace/s/sskher/552/552_project/DataArray.v
+!i122 648
 L0 11 5
 R7
 R20
 r1
 !s85 0
 31
-R27
-Z42 !s107 /filespace/s/sskher/552/552_project/DataArray.v|
-Z43 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/DataArray.v|
+Z43 !s108 1714096852.000000
+Z44 !s107 /filespace/s/sskher/552/552_project/DataArray.v|
+Z45 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/DataArray.v|
 !i113 0
 R30
 R5
@@ -445,49 +475,49 @@ R27
 R30
 R5
 vcache_fill_FSM
-Z44 2/filespace/s/sskher/552/552_project/cache_fsm.v
-Z45 !s110 1714092747
+Z46 2/filespace/s/sskher/552/552_project/cache_fsm.v
+Z47 !s110 1714098697
 !i10b 1
-!s100 _jFV9RF6CaM?EjijDlC<A1
-IkY^h7NjR>a0@JVchaP2`a0
+!s100 PnljzR>V6?=5LT_?_kTd32
+IJaU4L@6MU=ai:mQ0>ek7W0
 R17
-Z46 w1714092197
-Z47 8/filespace/s/sskher/552/552_project/cache_fsm.v
-Z48 F/filespace/s/sskher/552/552_project/cache_fsm.v
-!i122 631
+Z48 w1714098694
+Z49 8/filespace/s/sskher/552/552_project/cache_fsm.v
+Z50 F/filespace/s/sskher/552/552_project/cache_fsm.v
+!i122 652
 L0 57 40
 R7
 R20
 r1
 !s85 0
 31
-Z49 !s108 1714092747.000000
-Z50 !s107 /filespace/s/sskher/552/552_project/cache_fsm.v|
-Z51 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/cache_fsm.v|
+Z51 !s108 1714098697.000000
+Z52 !s107 /filespace/s/sskher/552/552_project/cache_fsm.v|
+Z53 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/cache_fsm.v|
 !i113 0
 R30
 R5
 ncache_fill_@f@s@m
 vcache_tb
-R44
-R45
+R46
+R47
 !i10b 1
 !s100 M5`@j2;KjjmQb4XRV0Bc=0
 I>]0iRU_PlH9?_E?eH@LlE1
 R17
-R46
-R47
 R48
-!i122 631
+R49
+R50
+!i122 652
 L0 98 50
 R7
 R20
 r1
 !s85 0
 31
-R49
-R50
 R51
+R52
+R53
 !i113 0
 R30
 R5
@@ -540,22 +570,22 @@ R30
 R5
 vcpu
 2/filespace/s/sskher/552/552_project/cpu.v
-!s110 1714093080
+!s110 1714100737
 !i10b 1
-!s100 <kd:HHbfb`B7V6ao<Koi_3
-IJL_CIj5MSdfoOMz_gfZWB3
+!s100 bMYfXf2ne44jomaY`BBUl3
+I9K_]QU`1]R<VEXRSbV4fl3
 R17
-w1714093075
+w1714100734
 8/filespace/s/sskher/552/552_project/cpu.v
 F/filespace/s/sskher/552/552_project/cpu.v
-!i122 637
-L0 1 292
+!i122 658
+L0 1 302
 R7
 R20
 r1
 !s85 0
 31
-!s108 1714093080.000000
+!s108 1714100737.000000
 !s107 /filespace/s/sskher/552/552_project/cpu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/cpu.v|
 !i113 0
@@ -608,48 +638,48 @@ R30
 R5
 vDataArray
 R38
-R23
+R39
 !i10b 1
 !s100 A>SH?XAHzRQnzjYBWnoa?1
 Ia]2U:_0GA@l<QPHI5R45V2
 R17
-R39
 R40
 R41
-!i122 594
-Z52 L0 6 3
+R42
+!i122 648
+Z54 L0 6 3
 R7
 R20
 r1
 !s85 0
 31
-R27
-R42
 R43
+R44
+R45
 !i113 0
 R30
 R5
 n@data@array
 vDCell
 R38
-R23
+R39
 !i10b 1
 !s100 z6C6@V8^FMUm5Fz605jRh2
 I6JM5NLm@;UH;z[iOR[I`R2
 R17
-R39
 R40
 R41
-!i122 594
+R42
+!i122 648
 L0 24 5
 R7
 R20
 r1
 !s85 0
 31
-R27
-R42
 R43
+R44
+R45
 !i113 0
 R30
 R5
@@ -688,7 +718,7 @@ w1711228761
 8/filespace/s/sskher/552/552_project/2B_flop.v
 F/filespace/s/sskher/552/552_project/2B_flop.v
 !i122 581
-Z53 L0 1 13
+Z55 L0 1 13
 R7
 R20
 r1
@@ -702,38 +732,38 @@ R30
 R5
 vDWord
 R38
-R23
+R39
 !i10b 1
 !s100 dHnQeAiiP:?hB[UD6`Y3O1
 ImUNDeLicVzXZTnJSSE_CG1
 R17
-R39
 R40
 R41
-!i122 594
+R42
+!i122 648
 L0 19 3
 R7
 R20
 r1
 !s85 0
 31
-R27
-R42
 R43
+R44
+R45
 !i113 0
 R30
 R5
 n@d@word
 vfour_bit_adder
-Z54 2/filespace/s/sskher/552/552_project/4bit_as.v
+Z56 2/filespace/s/sskher/552/552_project/4bit_as.v
 R16
 !i10b 1
 !s100 <J4On<Ml290khHTig]NED1
 Ij@c]Em^dEAmi`FnA64;bH0
 R17
 R18
-Z55 8/filespace/s/sskher/552/552_project/4bit_as.v
-Z56 F/filespace/s/sskher/552/552_project/4bit_as.v
+Z57 8/filespace/s/sskher/552/552_project/4bit_as.v
+Z58 F/filespace/s/sskher/552/552_project/4bit_as.v
 !i122 583
 L0 14 25
 R7
@@ -742,44 +772,44 @@ r1
 !s85 0
 31
 R21
-Z57 !s107 /filespace/s/sskher/552/552_project/4bit_as.v|
-Z58 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/4bit_as.v|
+Z59 !s107 /filespace/s/sskher/552/552_project/4bit_as.v|
+Z60 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/4bit_as.v|
 !i113 0
 R30
 R5
 vfull_adder_1bit
-Z59 2/filespace/s/sskher/552/552_project/PC_ad.v
+Z61 2/filespace/s/sskher/552/552_project/PC_ad.v
 R23
 !i10b 1
 !s100 bl=RE9C^oG_KB=@bbbnn42
 I>[aB[i:ejDQbB;o<bFHa`3
 R17
-Z60 w1709069739
-Z61 8/filespace/s/sskher/552/552_project/PC_ad.v
-Z62 F/filespace/s/sskher/552/552_project/PC_ad.v
+Z62 w1709069739
+Z63 8/filespace/s/sskher/552/552_project/PC_ad.v
+Z64 F/filespace/s/sskher/552/552_project/PC_ad.v
 !i122 598
-R53
+R55
 R7
 R20
 r1
 !s85 0
 31
 R27
-Z63 !s107 /filespace/s/sskher/552/552_project/PC_ad.v|
-Z64 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/PC_ad.v|
+Z65 !s107 /filespace/s/sskher/552/552_project/PC_ad.v|
+Z66 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/PC_ad.v|
 !i113 0
 R30
 R5
 vMBlock
-Z65 2/filespace/s/sskher/552/552_project/MetaDataArray.v
+Z67 2/filespace/s/sskher/552/552_project/MetaDataArray.v
 R23
 !i10b 1
 !s100 F<[agXiEVmYBa7U;cBMEh3
 I_Ma;<]IJ<ne^7W3A>z17U2
 R17
-Z66 w1713915483
-Z67 8/filespace/s/sskher/552/552_project/MetaDataArray.v
-Z68 F/filespace/s/sskher/552/552_project/MetaDataArray.v
+Z68 w1713915483
+Z69 8/filespace/s/sskher/552/552_project/MetaDataArray.v
+Z70 F/filespace/s/sskher/552/552_project/MetaDataArray.v
 !i122 596
 L0 10 3
 R7
@@ -788,22 +818,22 @@ r1
 !s85 0
 31
 R27
-Z69 !s107 /filespace/s/sskher/552/552_project/MetaDataArray.v|
-Z70 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/MetaDataArray.v|
+Z71 !s107 /filespace/s/sskher/552/552_project/MetaDataArray.v|
+Z72 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/MetaDataArray.v|
 !i113 0
 R30
 R5
 n@m@block
 vMCell
-R65
+R67
 R23
 !i10b 1
 !s100 m>5VC4AEXZmOR4k4Ra4^>3
 ISnnYMTJ:Uc7e71Nk=@fi;2
 R17
-R66
-R67
 R68
+R69
+R70
 !i122 596
 L0 14 5
 R7
@@ -812,15 +842,15 @@ r1
 !s85 0
 31
 R27
-R69
-R70
+R71
+R72
 !i113 0
 R30
 R5
 n@m@cell
 vmemory1c
 2/filespace/s/sskher/552/552_project/memory.v
-Z71 !s110 1714093119
+!s110 1714095341
 !i10b 1
 !s100 Ic3iN=_zNINGQlcL5[O]52
 I3X2bLW37aTBa4N>llaimQ0
@@ -828,14 +858,14 @@ R17
 w1714093116
 8/filespace/s/sskher/552/552_project/memory.v
 F/filespace/s/sskher/552/552_project/memory.v
-!i122 638
+!i122 643
 L0 31 39
 R7
 R20
 r1
 !s85 0
 31
-Z72 !s108 1714093119.000000
+!s108 1714095341.000000
 !s107 /filespace/s/sskher/552/552_project/memory.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/memory.v|
 !i113 0
@@ -843,61 +873,61 @@ R30
 R5
 vmemory4c
 2/filespace/s/sskher/552/552_project/multicycle_memory.v
-R71
+!s110 1714100863
 !i10b 1
-!s100 f19WZTZb0<MaI5`=1D9n00
-I5WTVMch<E`kE?;IEz3XjD1
+!s100 4:9ZAncJWT?F]3LBGnI@[0
+Ie@oAJSjU?DSJYK=oHDF2h3
 R17
-w1714093111
+w1714100860
 8/filespace/s/sskher/552/552_project/multicycle_memory.v
 F/filespace/s/sskher/552/552_project/multicycle_memory.v
-!i122 639
+!i122 659
 L0 24 69
 R7
 R20
 r1
 !s85 0
 31
-R72
+!s108 1714100862.000000
 !s107 /filespace/s/sskher/552/552_project/multicycle_memory.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/multicycle_memory.v|
 !i113 0
 R30
 R5
 vMetaDataArray
-R65
+R67
 R23
 !i10b 1
 !s100 ldE`N8M;>:mXI3mT9YMKO1
 Ic0UgRkAL<UN>1j07cfL?o0
 R17
-R66
-R67
 R68
+R69
+R70
 !i122 596
-R52
+R54
 R7
 R20
 r1
 !s85 0
 31
 R27
-R69
-R70
+R71
+R72
 !i113 0
 R30
 R5
 n@meta@data@array
 vone_bit_adder
-R54
+R56
 R16
 !i10b 1
 !s100 G45Nk6nZ04?bY>^?oQa1T0
 Il6FEZK]LIhEBz]P4dj@SY3
 R17
 R18
-R55
-R56
+R57
+R58
 !i122 583
 L0 1 12
 R7
@@ -906,21 +936,21 @@ r1
 !s85 0
 31
 R21
-R57
-R58
+R59
+R60
 !i113 0
 R30
 R5
 vPC_ad
-R59
+R61
 R23
 !i10b 1
 !s100 K8g:4a`f`Q=fFMH6NajQ`0
 IijJG3<7438ZB?>0;5iAiV0
 R17
-R60
-R61
 R62
+R63
+R64
 !i122 598
 R11
 R7
@@ -929,8 +959,8 @@ r1
 !s85 0
 31
 R27
-R63
-R64
+R65
+R66
 !i113 0
 R30
 R5
@@ -1102,48 +1132,48 @@ R21
 R30
 R5
 vsixteen_bit_inc
-R44
-R45
+R46
+R47
 !i10b 1
 !s100 Bhz=L6iF]MQB<LZ8IGAm`1
 IL[Q=f`7?0E9]9Bz5U]z>N1
 R17
-R46
-R47
 R48
-!i122 631
+R49
+R50
+!i122 652
 L0 39 17
 R7
 R20
 r1
 !s85 0
 31
-R49
-R50
 R51
+R52
+R53
 !i113 0
 R30
 R5
 vthree_bit_inc
-R44
-R45
+R46
+R47
 !i10b 1
 !s100 S;G5nL=IEk74djC_zDaPo0
 Io2Ci1Aj64C@h^<=L_?YJA3
 R17
-R46
-R47
 R48
-!i122 631
+R49
+R50
+!i122 652
 L0 19 18
 R7
 R20
 r1
 !s85 0
 31
-R49
-R50
 R51
+R52
+R53
 !i113 0
 R30
 R5
@@ -1171,25 +1201,25 @@ R21
 R30
 R5
 vtwo_bit_inc
-R44
-R45
+R46
+R47
 !i10b 1
 !s100 PzXf@Y3=oene_cO[`?D0B0
 ISRIzYEhL=kPGAz67L1RS00
 R17
-R46
-R47
 R48
-!i122 631
+R49
+R50
+!i122 652
 R19
 R7
 R20
 r1
 !s85 0
 31
-R49
-R50
 R51
+R52
+R53
 !i113 0
 R30
 R5
