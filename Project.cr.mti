@@ -63,6 +63,13 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 Top level modules:
 	ALU
 
+} {} {}} /filespace/s/sskher/552/552_project/cpu.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/cpu.v
+QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
+-- Compiling module cpu
+
+Top level modules:
+	cpu
+
 } {} {}} /filespace/s/sskher/552/552_project/MetaDataArray.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/MetaDataArray.v
 QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 -- Compiling module MetaDataArray
@@ -244,13 +251,6 @@ QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 Top level modules:
 	adder_tb
 
-} {} {}} /filespace/s/sskher/552/552_project/memory.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/memory.v
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module memory1c
-
-Top level modules:
-	memory1c
-
 } {} {}} /filespace/s/sskher/552/552_project/cache_fsm.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/cache_fsm.v
 QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
 -- Compiling module two_bit_inc
@@ -292,13 +292,6 @@ Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021
 
 Top level modules:
 	six_decode
-
-} {} {}} /filespace/s/sskher/552/552_project/multicycle_memory.v {1 {vlog -work work -vopt -stats=none /filespace/s/sskher/552/552_project/multicycle_memory.v
-QuestaSim vlog 2023.2_1 Compiler 2023.05 May 12 2023
--- Compiling module memory4c
-
-Top level modules:
-	memory4c
 
 } {} {}} I:/552/552_project/br_control.v {1 {vlog -work work -vopt -stats=none I:/552/552_project/br_control.v
 Questa Intel Starter FPGA Edition-64 vlog 2021.2 Compiler 2021.04 Apr 14 2021

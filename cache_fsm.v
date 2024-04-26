@@ -67,7 +67,6 @@ input memory_data_valid; // active high indicates valid data returning on memory
 input memBusy; // active high indicates valid data returning on memory bus
 
 wire stateIn, state;
-wire detectedIn, detected;
 wire [1:0] count, countIn;
 wire [2:0] chCount, chCountIn;
 wire ovf, en, addOvf, addEn, chOvf;

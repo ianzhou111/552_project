@@ -25,6 +25,7 @@ wire Ifsm_busy, Icstall;
 wire miss_detected;
 wire memory_data_valid;
 wire [15:0] mainMemOut;
+wire [15:0] IcurrBlockAdd;
 
 wire [15:0] IF_ID_Inst, IF_ID_PC_inc; /*** DECODE ***/
 wire MEM_WB_WriteReg; wire [15:0] MEM_WB_Result, MEM_WB_MemOut, MEM_WB_Inst; /*** WRITEBACK ***/
@@ -52,7 +53,6 @@ wire [7:0] IInMeta1, IInMeta2, IWay1Out, IWay2Out;
 wire IWriteWay1, IWriteWay2;
 wire [63:0] IBlockEn;
 wire [7:0] IMainWordEn;
-wire [15:0] IcurrBlockAdd;
 wire Iwrite_data_array, Iwrite_tag_array;
 six_decode ISD (.in(PC_val[9:4]), .out(IBlockEn));
 three_decode ITD2 (.in(IcurrBlockAdd[3:1]), .out(IMainWordEn));
@@ -168,8 +168,6 @@ assign Rs = FwdOp1XX ? EX_MEM_Result : (FwdOp1MX ? DstData : ID_EX_SrcData1);
 
 wire [15:0] Rt;
 assign Rt = FwdOp2XX ? EX_MEM_Result : (FwdOp2MX ? DstData : ID_EX_SrcData2);
-
-
 
 wire [15:0] Operand1;
 assign Operand1 = ID_EX_addrCalc ? (Rs & 16'hFFFE) : Rs;

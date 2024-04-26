@@ -75,6 +75,16 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 R1
 R0
 R1
@@ -222,10 +232,10 @@ R1
 cModel Technology
 Z3 dC:/Users/aimis/CS_ECE_files/552
 T_opt
-!s110 1714091216
-VCNhQI8goW;P3Lk89OIi][2
+!s110 1714093121
+VLUdXQ<6PkG49olWYi3=<O3
 04 7 4 work cpu_ptb fast 0
-=5-000ae431a4f1-662af4d0-6685b-a9831
+=11-000ae431a4f1-662afc41-1eb72-a9831
 R1
 !s12b OEM100
 !s124 OEM100
@@ -436,22 +446,22 @@ R30
 R5
 vcache_fill_FSM
 Z44 2/filespace/s/sskher/552/552_project/cache_fsm.v
-Z45 !s110 1714090216
+Z45 !s110 1714092747
 !i10b 1
-!s100 zaFlWQY[h53PnYL=1Ue7I3
-IE<D=Jml<3ILTJLfB@aTm52
+!s100 _jFV9RF6CaM?EjijDlC<A1
+IkY^h7NjR>a0@JVchaP2`a0
 R17
-Z46 w1714090210
+Z46 w1714092197
 Z47 8/filespace/s/sskher/552/552_project/cache_fsm.v
 Z48 F/filespace/s/sskher/552/552_project/cache_fsm.v
-!i122 623
-L0 57 41
+!i122 631
+L0 57 40
 R7
 R20
 r1
 !s85 0
 31
-Z49 !s108 1714090216.000000
+Z49 !s108 1714092747.000000
 Z50 !s107 /filespace/s/sskher/552/552_project/cache_fsm.v|
 Z51 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/cache_fsm.v|
 !i113 0
@@ -462,14 +472,14 @@ vcache_tb
 R44
 R45
 !i10b 1
-!s100 5LgVz=K7OG9C`j?EnCm8O0
-IBZ2IHkNj;5BL2ILi@NFIJ0
+!s100 M5`@j2;KjjmQb4XRV0Bc=0
+I>]0iRU_PlH9?_E?eH@LlE1
 R17
 R46
 R47
 R48
-!i122 623
-L0 99 50
+!i122 631
+L0 98 50
 R7
 R20
 r1
@@ -530,22 +540,22 @@ R30
 R5
 vcpu
 2/filespace/s/sskher/552/552_project/cpu.v
-!s110 1714091211
+!s110 1714093080
 !i10b 1
-!s100 Tk^7kmEOO3Z>A3[<KQ8L53
-IfMgL;bMUTY:kz_TLQ8B;E0
+!s100 <kd:HHbfb`B7V6ao<Koi_3
+IJL_CIj5MSdfoOMz_gfZWB3
 R17
-w1714091209
+w1714093075
 8/filespace/s/sskher/552/552_project/cpu.v
 F/filespace/s/sskher/552/552_project/cpu.v
-!i122 630
-L0 1 294
+!i122 637
+L0 1 292
 R7
 R20
 r1
 !s85 0
 31
-!s108 1714091211.000000
+!s108 1714093080.000000
 !s107 /filespace/s/sskher/552/552_project/cpu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/cpu.v|
 !i113 0
@@ -810,22 +820,22 @@ R5
 n@m@cell
 vmemory1c
 2/filespace/s/sskher/552/552_project/memory.v
-Z71 !s110 1714090977
+Z71 !s110 1714093119
 !i10b 1
 !s100 Ic3iN=_zNINGQlcL5[O]52
 I3X2bLW37aTBa4N>llaimQ0
 R17
-w1714090966
+w1714093116
 8/filespace/s/sskher/552/552_project/memory.v
 F/filespace/s/sskher/552/552_project/memory.v
-!i122 627
+!i122 638
 L0 31 39
 R7
 R20
 r1
 !s85 0
 31
-Z72 !s108 1714090977.000000
+Z72 !s108 1714093119.000000
 !s107 /filespace/s/sskher/552/552_project/memory.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/memory.v|
 !i113 0
@@ -838,10 +848,10 @@ R71
 !s100 f19WZTZb0<MaI5`=1D9n00
 I5WTVMch<E`kE?;IEz3XjD1
 R17
-w1714090971
+w1714093111
 8/filespace/s/sskher/552/552_project/multicycle_memory.v
 F/filespace/s/sskher/552/552_project/multicycle_memory.v
-!i122 628
+!i122 639
 L0 24 69
 R7
 R20
@@ -1101,7 +1111,7 @@ R17
 R46
 R47
 R48
-!i122 623
+!i122 631
 L0 39 17
 R7
 R20
@@ -1124,7 +1134,7 @@ R17
 R46
 R47
 R48
-!i122 623
+!i122 631
 L0 19 18
 R7
 R20
@@ -1170,7 +1180,7 @@ R17
 R46
 R47
 R48
-!i122 623
+!i122 631
 R19
 R7
 R20
