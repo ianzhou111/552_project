@@ -107,7 +107,7 @@ dff ICacheWriteDelR (.q(ICacheWriteDel), .d(ICacheWrite), .wen(1'b1), .clk(clk),
 wire [7:0] ICacheWordDel;
 dff ICacheWordDelR [7:0] (.q(ICacheWordDel), .d(ICacheWord), .wen(1'b1), .clk(clk), .rst(rst));
 
-DataArray ICache (.clk(clk), .rst(rst), .DataIn(ICacheIn), .Write(Ifsm_busy? ICacheWriteDel: ICacheWrite), .BlockEnable(ICBlockEnDel), .WordEnable(Ifsm_busy ? ICacheWordDel: ICacheWord), .DataOut(Inst));
+DataArray ICache (.clk(clk), .rst(rst), .DataIn(ICacheIn), .Write(Ifsm_busy? ICacheWriteDel: ICacheWrite), .BlockEnable(Ifsm_busy ? ICBlockEnDel : ICBlockEn), .WordEnable(Ifsm_busy ? ICacheWordDel: ICacheWord), .DataOut(Inst));
 
 cache_fill_FSM IcacheFSM(.clk(clk), .rst_n(rst_n), .miss_detected(Imiss_detected), .miss_address(PC_val), .fsm_busy(Ifsm_busy), .write_data_array(Iwrite_data_array),
 .write_tag_array(Iwrite_tag_array), .memory_address(IcurrBlockAdd), .memory_data_valid(memory_data_valid), .memBusy(sameCycleMiss));
@@ -254,7 +254,7 @@ assign miss_detected1 = EX_MEM_enableMem & (~Way1TagMatch & ~Way2TagMatch);
 dff missEdge (.q(miss_detected2), .d(miss_detected1), .wen(1'b1), .clk(clk), .rst(rst));
 assign miss_detected = miss_detected1 & ~miss_detected2;
 
-//Metadata Bits[7:2] are tag; Bit[1] is valid bit; Bit[0] is LRU bit :(
+//Metadata Bits[7:2] are tag; Bit[1] is valid bit; Bit[0] is LRU bit :)
 assign Way1TagMatch = (EX_MEM_Result[15:10] == DWay1Out[7:2]) & DWay1Out[1] & ~write_tag_array;
 assign Way2TagMatch = (EX_MEM_Result[15:10] == DWay2Out[7:2]) & DWay2Out[1] & ~write_tag_array;
 
@@ -274,7 +274,7 @@ cache_fill_FSM cacheFSM(.clk(clk), .rst_n(rst_n), .miss_detected(miss_detected),
 .write_tag_array(write_tag_array), .memory_address(currBlockAdd), .memory_data_valid(memory_data_valid), .memBusy(Ifsm_busy));
 
 wire mainMemEn, mainMemWR;
-assign mainMemAdd = fsm_busy ? currBlockAdd : Ifsm_busy ? IcurrBlockAdd : EX_MEM_Result;
+assign mainMemAdd = (Ifsm_busy & ~sameCycleMiss) ? IcurrBlockAdd : fsm_busy ? currBlockAdd : EX_MEM_Result; 
 assign mainMemEn = EX_MEM_readWriteMem | fsm_busy | Ifsm_busy;
 assign mainMemWR = (EX_MEM_readWriteMem & ~miss_detected1) & ~fsm_busy & ~Ifsm_busy;
 assign mainMemIn = MemIn;

@@ -115,6 +115,16 @@ R0
 R1
 R0
 R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
+R0
+R1
 R1
 R0
 R1
@@ -262,10 +272,10 @@ R1
 cModel Technology
 Z3 dC:/Users/aimis/CS_ECE_files/552
 T_opt
-!s110 1714100865
-V[G<1iN`n?8UAdRQ:m`@K12
+!s110 1714103555
+VVSV<1_951]IFfz]jDS9aG0
 04 7 4 work cpu_ptb fast 0
-=35-000ae431a4f1-662b1a80-d31db-bc30c
+=43-000ae431a4f1-662b2503-3e36a-bc30c
 R1
 !s12b OEM100
 !s124 OEM100
@@ -570,22 +580,22 @@ R30
 R5
 vcpu
 2/filespace/s/sskher/552/552_project/cpu.v
-!s110 1714100737
+!s110 1714102967
 !i10b 1
-!s100 bMYfXf2ne44jomaY`BBUl3
-I9K_]QU`1]R<VEXRSbV4fl3
+!s100 Tm4W>UALl76j=k??f3zVY3
+I?XOG@cBc0FDUDo03fObzi1
 R17
-w1714100734
+w1714102964
 8/filespace/s/sskher/552/552_project/cpu.v
 F/filespace/s/sskher/552/552_project/cpu.v
-!i122 658
+!i122 664
 L0 1 302
 R7
 R20
 r1
 !s85 0
 31
-!s108 1714100737.000000
+!s108 1714102967.000000
 !s107 /filespace/s/sskher/552/552_project/cpu.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/cpu.v|
 !i113 0
@@ -873,22 +883,22 @@ R30
 R5
 vmemory4c
 2/filespace/s/sskher/552/552_project/multicycle_memory.v
-!s110 1714100863
+!s110 1714103550
 !i10b 1
-!s100 4:9ZAncJWT?F]3LBGnI@[0
-Ie@oAJSjU?DSJYK=oHDF2h3
+!s100 cJ0loIgE87j1g4lA9Gn861
+I>6YVUV1H`Fz;WaIUiWAGV2
 R17
-w1714100860
+w1714103546
 8/filespace/s/sskher/552/552_project/multicycle_memory.v
 F/filespace/s/sskher/552/552_project/multicycle_memory.v
-!i122 659
+!i122 665
 L0 24 69
 R7
 R20
 r1
 !s85 0
 31
-!s108 1714100862.000000
+!s108 1714103550.000000
 !s107 /filespace/s/sskher/552/552_project/multicycle_memory.v|
 !s90 -reportprogress|300|-work|work|-vopt|-stats=none|/filespace/s/sskher/552/552_project/multicycle_memory.v|
 !i113 0
