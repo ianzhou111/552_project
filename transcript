@@ -1,45 +1,159 @@
-# Compile of 2B_flop.v was successful.
-# Compile of 3_8decode.v was successful.
-# Compile of 4bit_as.v was successful.
-# Compile of 7_128decode.v was successful.
-# Compile of adder_tb.sv was successful.
-# Compile of BR_ad.v was successful.
-# Compile of br_control.v was successful.
-# Compile of cache_fsm.v was successful.
-# Compile of CLA.v was successful.
-# Compile of control.v was successful.
-# Compile of cpu.v failed with 7 errors.
-# Compile of DataArray.v was successful.
-# Compile of D-Flip-Flop.v was successful.
-# Compile of memory.v was successful.
-# Compile of MetaDataArray.v was successful.
-# Compile of multicycle_memory.v was successful.
-# Compile of PC_ad.v was successful.
-# Compile of project-phase2-testbench.v was successful.
-# Compile of project-phase3-testbench.v was successful.
-# Compile of PSA_16bits.v was successful.
-# Compile of RegFile.v was successful.
-# Compile of shifter.v was successful.
-# 22 compiles, 1 failed with 7 errors.
+# //  Questa Sim
+# //  Version 2023.2_1 linux May 12 2023
+# //
+# //  Copyright 1991-2023 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  QuestaSim and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project Project
 # Compile of cpu.v was successful.
 vsim -voptargs=+acc work.cpu_ptb
 # vsim -voptargs="+acc" work.cpu_ptb 
-# Start time: 20:57:22 on Apr 23,2024
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Error: I:/552/552_project/cpu.v(158): Module 'six_decode' is not defined.
-#  For instance 'SD' at path 'cpu_ptb.DUT'
-# Optimization failed
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
-# Error loading design
-# End time: 20:57:27 on Apr 23,2024, Elapsed time: 0:00:05
-# Errors: 1, Warnings: 7
-# Compile of 6_64decode.v was successful.
-vsim -voptargs=+acc work.cpu_ptb
-# vsim -voptargs="+acc" work.cpu_ptb 
-# Start time: 20:58:10 on Apr 23,2024
-# ** Note: (vsim-3812) Design is being optimized...
-# ** Error (suppressible): (vopt-14408) Intel Starter FPGA Edition recommended capacity is 5000 non-OEM instances. There are 37183 non OEM instances. Expect performance to be severely impacted. 
-# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=1, Warnings=0.
-# Error loading design
-# End time: 20:58:15 on Apr 23,2024, Elapsed time: 0:00:05
-# Errors: 1, Warnings: 3
+# Start time: 15:23:40 on Apr 25,2024
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.six_decode(fast)
+# Loading work.three_decode(fast)
+# Loading work.MetaDataArray(fast)
+# Loading work.seven_decode(fast)
+# Loading work.DataArray(fast)
+# Loading work.cache_fill_FSM(fast)
+# Loading work.two_bit_inc(fast)
+# Loading work.one_bit_adder(fast)
+# Loading work.three_bit_inc(fast)
+# Loading work.sixteen_bit_inc(fast)
+# Loading work.memory4c(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+# Loading work.MBlock(fast)
+# Loading work.Block(fast)
+# Loading work.MCell(fast)
+# Loading work.DWord(fast)
+# Loading work.DCell(fast)
+add wave -position insertpoint sim:/cpu_ptb/DUT/*
+add wave -position insertpoint sim:/cpu_ptb/*
+add wave -position insertpoint sim:/cpu_ptb/DUT/*
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : /filespace/s/sskher/552/552_project/project-phase3-testbench.v(157)
+#    Time: 33305 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at /filespace/s/sskher/552/552_project/project-phase3-testbench.v line 157
+# Compile of cpu.v was successful.
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.six_decode(fast)
+# Loading work.three_decode(fast)
+# Loading work.MetaDataArray(fast)
+# Loading work.seven_decode(fast)
+# Loading work.DataArray(fast)
+# Loading work.cache_fill_FSM(fast)
+# Loading work.two_bit_inc(fast)
+# Loading work.one_bit_adder(fast)
+# Loading work.three_bit_inc(fast)
+# Loading work.sixteen_bit_inc(fast)
+# Loading work.memory4c(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+# Loading work.MBlock(fast)
+# Loading work.Block(fast)
+# Loading work.MCell(fast)
+# Loading work.DWord(fast)
+# Loading work.DCell(fast)
+run
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+run -all
+# ** Note: $stop    : /filespace/s/sskher/552/552_project/project-phase3-testbench.v(157)
+#    Time: 33305 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at /filespace/s/sskher/552/552_project/project-phase3-testbench.v line 157
+# Compile of cpu.v was successful.
+restart
+# Closing VCD file "dump.vcd"
+# ** Note: (vsim-12125) Error and warning message counts have been reset to '0' because of 'restart'.
+# ** Note: (vsim-3813) Design is being optimized due to module recompilation...
+# ** Warning: (vopt-10587) Some optimizations are turned off because the +acc switch is in effect. This will cause your simulation to run slowly. Please use -access/-debug to maintain needed visibility.
+# ** Note: (vsim-12126) Error and warning message counts have been restored: Errors=0, Warnings=1.
+# Loading work.cpu_ptb(fast)
+# Loading work.cpu(fast)
+# Loading work.PC_ad(fast)
+# Loading work.Register(fast)
+# Loading work.memory1c(fast)
+# Loading work.br_control(fast)
+# Loading work.control(fast)
+# Loading work.BR_ad(fast)
+# Loading work.RegisterFile(fast)
+# Loading work.ReadDecoder_4_16(fast)
+# Loading work.WriteDecoder_4_16(fast)
+# Loading work.dff(fast)
+# Loading work.ALU(fast)
+# Loading work.CLA_4bit(fast)
+# Loading work.Shifter(fast)
+# Loading work.six_decode(fast)
+# Loading work.three_decode(fast)
+# Loading work.MetaDataArray(fast)
+# Loading work.seven_decode(fast)
+# Loading work.DataArray(fast)
+# Loading work.cache_fill_FSM(fast)
+# Loading work.two_bit_inc(fast)
+# Loading work.one_bit_adder(fast)
+# Loading work.three_bit_inc(fast)
+# Loading work.sixteen_bit_inc(fast)
+# Loading work.memory4c(fast)
+# Loading work.full_adder_1bit(fast)
+# Loading work.BitCell(fast)
+# Loading work.MBlock(fast)
+# Loading work.Block(fast)
+# Loading work.MCell(fast)
+# Loading work.DWord(fast)
+# Loading work.DCell(fast)
+run -all
+# Hello world...simulation starting
+# See verilogsim.plog and verilogsim.ptrace for output
+# ** Note: $stop    : /filespace/s/sskher/552/552_project/project-phase3-testbench.v(157)
+#    Time: 33305 ns  Iteration: 0  Instance: /cpu_ptb
+# Break in Module cpu_ptb at /filespace/s/sskher/552/552_project/project-phase3-testbench.v line 157
+# End time: 16:02:30 on Apr 25,2024, Elapsed time: 0:38:50
+# Errors: 0, Warnings: 2

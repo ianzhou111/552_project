@@ -21,6 +21,10 @@ wire ZALU, ZOut, VALU, Vout, NALU, Nout;
 wire Zen, Ven, Nen;
 wire stall,tstall,count;
 wire fsm_busy, cstall;
+wire Ifsm_busy, Icstall;
+wire miss_detected;
+wire memory_data_valid;
+wire [15:0] mainMemOut;
 
 wire [15:0] IF_ID_Inst, IF_ID_PC_inc; /*** DECODE ***/
 wire MEM_WB_WriteReg; wire [15:0] MEM_WB_Result, MEM_WB_MemOut, MEM_WB_Inst; /*** WRITEBACK ***/
@@ -40,15 +44,68 @@ assign PC_in = (BrMux[1] ? SrcData1 : (BrMux[0] ? PC_br : (&Inst[15:12])? PC_val
 
 assign BrMux = (IF_ID_Inst[15] & IF_ID_Inst[14] & ~IF_ID_Inst[13]) ? (branchValid ? (IF_ID_Inst[12] ? 2'b10 : 2'b01) : 2'b00) : 2'b00;
 
-Register PC ( .clk(clk), .rst(rst), .D(PC_in), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(PC_val), .Bitline2());
+Register PC ( .clk(clk), .rst(rst), .D(PC_in), .WriteReg(~stall & ~cstall & ~Icstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(PC_val), .Bitline2());
 
 
-memory1c IMem (.data_out(Inst), .data_in(16'b0), .addr(PC_val), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(rst));
+//memory1c IMem (.data_out(Inst), .data_in(16'b0), .addr(PC_val), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(rst));
+wire [7:0] IInMeta1, IInMeta2, IWay1Out, IWay2Out;
+wire IWriteWay1, IWriteWay2;
+wire [63:0] IBlockEn;
+wire [7:0] IMainWordEn;
+wire [15:0] IcurrBlockAdd;
+wire Iwrite_data_array, Iwrite_tag_array;
+six_decode ISD (.in(PC_val[9:4]), .out(IBlockEn));
+three_decode ITD2 (.in(IcurrBlockAdd[3:1]), .out(IMainWordEn));
+
+wire IvalidWay1, IvalidWay2, ILRUWay1;
+dff IvalidWay1R (.q(IvalidWay1), .d(IWay1Out[1]), .wen(1'b1), .clk(clk), .rst(rst));
+dff IvalidWay2R(.q(IvalidWay2), .d(IWay2Out[1]), .wen(1'b1), .clk(clk), .rst(rst));
+dff ILRUWay1R (.q(ILRUWay1), .d(IWay1Out[0]), .wen(1'b1), .clk(clk), .rst(rst));
+assign IWriteWay1 = (Iwrite_tag_array) & (~IvalidWay1 | (IvalidWay1 & ILRUWay1 & IvalidWay2));
+assign IWriteWay2 = (Iwrite_tag_array) & ~IWriteWay1;
+
+wire [6:0] Itagv1, Itagv2;
+dff Itagv1R [6:0] (.q(Itagv1), .d(IWay1Out[7:1]), .wen(1'b1), .clk(clk), .rst(rst));
+dff Itagv2R [6:0] (.q(Itagv2), .d(IWay2Out[7:1]), .wen(1'b1), .clk(clk), .rst(rst));
+
+assign IInMeta1 = IWriteWay1 ? {PC_val[15:10], 2'b10} : {Itagv1, 1'b1};
+assign IInMeta2 = IWriteWay2 ? {PC_val[15:10], 2'b10} : {Itagv2, 1'b1};
+
+MetaDataArray IMeta1 (.clk(clk), .rst(rst), .DataIn(IInMeta1), .Write(Iwrite_tag_array), .BlockEnable(IBlockEn), .DataOut(IWay1Out));
+MetaDataArray IMeta2 (.clk(clk), .rst(rst), .DataIn(IInMeta2), .Write(Iwrite_tag_array), .BlockEnable(IBlockEn), .DataOut(IWay2Out));
+
+wire Imiss_detected, Imiss_detected1, Imiss_detected2;
+wire IWay1TagMatch, IWay2TagMatch;
+wire sameCycleMiss;
+assign sameCycleMiss = Imiss_detected & miss_detected;
+assign Icstall = Ifsm_busy | Imiss_detected | sameCycleMiss;
+assign Imiss_detected1 = (~IWay1TagMatch & ~IWay2TagMatch);
+dff ImissEdge (.q(Imiss_detected2), .d(Imiss_detected1), .wen(1'b1), .clk(clk), .rst(rst));
+assign Imiss_detected = Imiss_detected1 & ~Imiss_detected2;
+
+//Metadata Bits[7:2] are tag; Bit[1] is valid bit; Bit[0] is LRU bit :(
+assign IWay1TagMatch = (PC_val[15:10] == IWay1Out[7:2]) & IWay1Out[1] & ~Iwrite_tag_array;
+assign IWay2TagMatch = (PC_val[15:10] == IWay2Out[7:2]) & IWay2Out[1] & ~Iwrite_tag_array;
+
+wire Iway, ImatchWay;
+assign ImatchWay = (IWay1TagMatch) ? 1'b0 : 1'b1;
+assign Iway = Ifsm_busy ? ~(~IvalidWay1 | (IvalidWay1 & ILRUWay1 & IvalidWay2)): ImatchWay;
+wire [7:0] ICacheWord;
+wire [127:0] ICBlockEn;
+wire [15:0] ICacheIn;
+seven_decode ISeD (.in({PC_val[9:4], Iway}), .out(ICBlockEn));
+assign ICacheWrite = Ifsm_busy;
+assign ICacheWord = IMainWordEn;
+assign ICacheIn = mainMemOut;
+DataArray ICache (.clk(clk), .rst(rst), .DataIn(ICacheIn), .Write(ICacheWrite), .BlockEnable(ICBlockEn), .WordEnable(ICacheWord), .DataOut(Inst));
+
+cache_fill_FSM IcacheFSM(.clk(clk), .rst_n(rst_n), .miss_detected(Imiss_detected), .miss_address(PC_val), .fsm_busy(Ifsm_busy), .write_data_array(Iwrite_data_array),
+.write_tag_array(Iwrite_tag_array), .memory_address(IcurrBlockAdd), .memory_data_valid(memory_data_valid), .memBusy(sameCycleMiss));
 
 /**** DECODE ****/
 
-Register IF_ID_InstR ( .clk(clk), .rst(rst | (branch & ~stall)), .D(Inst), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_Inst), .Bitline2());
-Register IF_ID_PC_incR ( .clk(clk), .rst(rst | (branch & ~stall)), .D(PC_inc), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_PC_inc), .Bitline2());
+Register IF_ID_InstR ( .clk(clk), .rst(rst | (branch & ~stall) | Icstall), .D(Inst), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_Inst), .Bitline2());
+Register IF_ID_PC_incR ( .clk(clk), .rst(rst | (branch & ~stall) | Icstall), .D(PC_inc), .WriteReg(~stall & ~cstall), .ReadEnable1(1'b1), .ReadEnable2(1'b0), .Bitline1(IF_ID_PC_inc), .Bitline2());
 
 br_control bcUnit (.condition(IF_ID_Inst[11:9]), .flags({ZOut, Vout, Nout}), .branch(branchValid));
 assign branch = BrMux[1] | BrMux[0];
@@ -176,43 +233,42 @@ wire [6:0] tagv1, tagv2;
 dff tagv1R [6:0] (.q(tagv1), .d(DWay1Out[7:1]), .wen(1'b1), .clk(clk), .rst(rst));
 dff tagv2R [6:0] (.q(tagv2), .d(DWay2Out[7:1]), .wen(1'b1), .clk(clk), .rst(rst));
 
-assign DInMeta1 = DWriteWay1 ? {EX_MEM_Result[9:4], 2'b10} : {tagv1, 1'b1};
-assign DInMeta2 = DWriteWay2 ? {EX_MEM_Result[9:4], 2'b10} : {tagv2, 1'b1};
+assign DInMeta1 = DWriteWay1 ? {EX_MEM_Result[15:10], 2'b10} : {tagv1, 1'b1};
+assign DInMeta2 = DWriteWay2 ? {EX_MEM_Result[15:10], 2'b10} : {tagv2, 1'b1};
 
 MetaDataArray DMeta1 (.clk(clk), .rst(rst), .DataIn(DInMeta1), .Write(write_tag_array), .BlockEnable(DBlockEn), .DataOut(DWay1Out));
 MetaDataArray DMeta2 (.clk(clk), .rst(rst), .DataIn(DInMeta2), .Write(write_tag_array), .BlockEnable(DBlockEn), .DataOut(DWay2Out));
 
-wire miss_detected, miss_detected1, miss_detected2;
+wire miss_detected1, miss_detected2;
 wire Way1TagMatch, Way2TagMatch;
-assign cstall = fsm_busy | miss_detected;
+assign cstall = fsm_busy | miss_detected | (miss_detected & Ifsm_busy);
 assign miss_detected1 = EX_MEM_enableMem & (~Way1TagMatch & ~Way2TagMatch);
 dff missEdge (.q(miss_detected2), .d(miss_detected1), .wen(1'b1), .clk(clk), .rst(rst));
 assign miss_detected = miss_detected1 & ~miss_detected2;
 
 //Metadata Bits[7:2] are tag; Bit[1] is valid bit; Bit[0] is LRU bit :(
-assign Way1TagMatch = (EX_MEM_Result[9:4] == DWay1Out[7:2]) & DWay1Out[1] & ~write_tag_array;
-assign Way2TagMatch = (EX_MEM_Result[9:4] == DWay2Out[7:2]) & DWay2Out[1] & ~write_tag_array;
+assign Way1TagMatch = (EX_MEM_Result[15:10] == DWay1Out[7:2]) & DWay1Out[1] & ~write_tag_array;
+assign Way2TagMatch = (EX_MEM_Result[15:10] == DWay2Out[7:2]) & DWay2Out[1] & ~write_tag_array;
 
 wire way, matchWay;
 assign matchWay = (Way1TagMatch) ? 1'b0 : 1'b1;
 assign way = fsm_busy ? ~(~validWay1 | (validWay1 & LRUWay1 & validWay2)): matchWay;
 wire [7:0] DCacheWord;
 wire [127:0] DCBlockEn;
-wire [15:0] mainMemOut, mainMemIn, mainMemAdd, DCacheIn;
+wire [15:0] mainMemIn, mainMemAdd, DCacheIn;
 seven_decode SeD (.in({EX_MEM_Result[9:4], way}), .out(DCBlockEn));
 assign DCacheWrite = fsm_busy | (EX_MEM_readWriteMem & ~miss_detected1);
 assign DCacheWord = fsm_busy ? DMainWordEn : DWordEn;
 assign DCacheIn = fsm_busy ? mainMemOut : MemIn;
 DataArray DCache (.clk(clk), .rst(rst), .DataIn(DCacheIn), .Write(DCacheWrite), .BlockEnable(DCBlockEn), .WordEnable(DCacheWord), .DataOut(MemOut));
 
-wire memory_data_valid;
 cache_fill_FSM cacheFSM(.clk(clk), .rst_n(rst_n), .miss_detected(miss_detected), .miss_address(EX_MEM_Result), .fsm_busy(fsm_busy), .write_data_array(write_data_array),
-.write_tag_array(write_tag_array), .memory_address(currBlockAdd), .memory_data_valid(memory_data_valid));
+.write_tag_array(write_tag_array), .memory_address(currBlockAdd), .memory_data_valid(memory_data_valid), .memBusy(Ifsm_busy));
 
 wire mainMemEn, mainMemWR;
-assign mainMemAdd = fsm_busy ? currBlockAdd : EX_MEM_Result;
-assign mainMemEn = EX_MEM_readWriteMem | fsm_busy;
-assign mainMemWR = (EX_MEM_readWriteMem & ~miss_detected1) & ~fsm_busy;
+assign mainMemAdd = fsm_busy ? currBlockAdd : Ifsm_busy ? IcurrBlockAdd : EX_MEM_Result;
+assign mainMemEn = EX_MEM_readWriteMem | fsm_busy | Ifsm_busy;
+assign mainMemWR = (EX_MEM_readWriteMem & ~miss_detected1) & ~fsm_busy & ~Ifsm_busy;
 assign mainMemIn = MemIn;
 memory4c mainMem (.data_out(mainMemOut), .data_in(mainMemIn), .addr(mainMemAdd), .enable(mainMemEn), .wr(mainMemWR), .clk(clk), .rst(rst), .data_valid(memory_data_valid));
 

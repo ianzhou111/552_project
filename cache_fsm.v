@@ -55,7 +55,7 @@ assign Sum = en ? s : A;
 endmodule
 
 module cache_fill_FSM(clk, rst_n, miss_detected, miss_address, fsm_busy, write_data_array,
-write_tag_array,memory_address, memory_data_valid);
+write_tag_array,memory_address, memory_data_valid, memBusy);
 input clk, rst_n;
 input miss_detected; // active high when tag match logic detects a miss
 input [15:0] miss_address; // address that missed the cache
@@ -64,8 +64,10 @@ output write_data_array; // write enable to cache data array to signal when fill
 output write_tag_array; // write enable to cache tag array to signal when all words are filled in to data array
 output [15:0] memory_address; // address to read from memory
 input memory_data_valid; // active high indicates valid data returning on memory bus
+input memBusy; // active high indicates valid data returning on memory bus
 
 wire stateIn, state;
+wire detectedIn, detected;
 wire [1:0] count, countIn;
 wire [2:0] chCount, chCountIn;
 wire ovf, en, addOvf, addEn, chOvf;
@@ -80,15 +82,16 @@ three_bit_inc Inc3 (.A(chCount), .en(addEn), .Sum(chCountIn), .Ovfl(chOvf));
 sixteen_bit_inc AddInc (.A(memory_address), .en(addEn), .Sum(addInc), .Ovfl(addOvf));
 
 dff State (.q(state), .d(stateIn), .wen(1'b1), .clk(clk), .rst(~rst_n));
+dff detected_miss (.q(detected), .d(detectedIn), .wen(1'b1), .clk(clk), .rst(~rst_n));
 
 assign stateIn = (~state & miss_detected) | (state & (~chOvf | ~(count[0] & count[1])));
-assign en = state;
+assign en = state & ~memBusy;
 assign fsm_busy = write_data_array | write_tag_array;
 assign write_data_array = state;
 assign write_tag_arrayIn = ~stateIn & state;
 dff tagSigDelay (.q(write_tag_array), .d(write_tag_arrayIn), .wen(1'b1), .clk(clk), .rst(~rst_n));
 
-assign addEn = count[1] & count[0] & state & memory_data_valid;
+assign addEn = count[1] & count[0] & state & memory_data_valid & ~memBusy;
 assign addIn = miss_detected ? (miss_address & 16'hFFF0) : addInc;
 
 endmodule
