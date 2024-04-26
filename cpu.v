@@ -198,7 +198,7 @@ assign Result = loadImmediate ? (ID_EX_Inst[12] ? {ID_EX_Inst[7:0], Rt[7:0]} : {
                 loadPC ?        ID_EX_PC_inc :
                                 ALUOut;
 
-dff Z (.q(ZOut), .d(ZALU), .wen(ID_EX_Zen), .clk(clk), .rst(rst));
+dff Z (.q(ZOut), .d(ZALU), .wen(ID_EX_Zen&(ID_EX_Inst[15:0]!=16'h0000)), .clk(clk), .rst(rst));
 dff V (.q(Vout), .d(VALU), .wen(ID_EX_Ven), .clk(clk), .rst(rst));
 dff N (.q(Nout), .d(NALU), .wen(ID_EX_Nen), .clk(clk), .rst(rst));
 
