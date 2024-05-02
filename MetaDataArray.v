@@ -3,12 +3,12 @@
 //BlockEnable is one-hot
 //WriteEnable is one on writes and zero on reads
 
-module MetaDataArray(input clk, input rst, input [7:0] DataIn, input Write, input [63:0] BlockEnable, output [7:0] DataOut);
-	MBlock Mblk[63:0]( .clk(clk), .rst(rst), .Din(DataIn), .WriteEnable(Write), .Enable(BlockEnable), .Dout(DataOut));
+module MetaDataArray(input clk, input rst, input [9:0] DataIn, input Write, input [31:0] BlockEnable, output [9:0] DataOut);
+	MBlock Mblk[31:0]( .clk(clk), .rst(rst), .Din(DataIn), .WriteEnable(Write), .Enable(BlockEnable), .Dout(DataOut));
 endmodule
 
-module MBlock( input clk,  input rst, input [7:0] Din, input WriteEnable, input Enable, output [7:0] Dout);
-	MCell mc[7:0]( .clk(clk), .rst(rst), .Din(Din[7:0]), .WriteEnable(WriteEnable), .Enable(Enable), .Dout(Dout[7:0]));
+module MBlock( input clk,  input rst, input [9:0] Din, input WriteEnable, input Enable, output [9:0] Dout);
+	MCell mc[9:0]( .clk(clk), .rst(rst), .Din(Din[9:0]), .WriteEnable(WriteEnable), .Enable(Enable), .Dout(Dout[9:0]));
 endmodule
 
 module MCell( input clk,  input rst, input Din, input WriteEnable, input Enable, output Dout);

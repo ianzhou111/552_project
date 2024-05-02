@@ -49,53 +49,106 @@ Register PC ( .clk(clk), .rst(rst), .D(PC_in), .WriteReg(~stall & ~cstall & ~Ics
 
 
 //memory1c IMem (.data_out(Inst), .data_in(16'b0), .addr(PC_val), .enable(1'b1), .wr(1'b0), .clk(clk), .rst(rst));
-wire [7:0] IInMeta1, IInMeta2, IWay1Out, IWay2Out;
-wire IWriteWay1, IWriteWay2;
-wire [63:0] IBlockEn;
+wire [9:0] IInMeta1, IInMeta2, IInMeta3, IInMeta4, IWay1Out, IWay2Out,IWay3Out, IWay4Out;
+wire IWriteWay1, IWriteWay2,IWriteWay3, IWriteWay4;
+wire [31:0] IBlockEn;
 wire [7:0] IPCWordEn;
 wire [7:0] IMainWordEn;
 wire Iwrite_data_array, Iwrite_tag_array;
-six_decode ISD (.in(PC_val[9:4]), .out(IBlockEn));
+//six_decode ISD (.in(PC_val[9:4]), .out(IBlockEn));
+five_decode ISDfive (.in(PC_val[8:4]), .out(IBlockEn));
+
 three_decode ITD1 (.in(PC_val[3:1]), .out(IPCWordEn));
 three_decode ITD2 (.in(IcurrBlockAdd[3:1]), .out(IMainWordEn));
 
-wire IvalidWay1, IvalidWay2, ILRUWay1;
-dff IvalidWay1R (.q(IvalidWay1), .d(IWay1Out[1]), .wen(1'b1), .clk(clk), .rst(rst));
-dff IvalidWay2R(.q(IvalidWay2), .d(IWay2Out[1]), .wen(1'b1), .clk(clk), .rst(rst));
-dff ILRUWay1R (.q(ILRUWay1), .d(IWay1Out[0]), .wen(1'b1), .clk(clk), .rst(rst));
-assign IWriteWay1 = (Iwrite_tag_array) & (~IvalidWay1 | (IvalidWay1 & ILRUWay1 & IvalidWay2));
-assign IWriteWay2 = (Iwrite_tag_array) & ~IWriteWay1;
+wire IvalidWay1, IvalidWay2, IvalidWay3, IvalidWay4;
+wire [1:0] ILRUWay1, ILRUWay2, ILRUWay3, ILRUWay4;
+dff IvalidWay1R (.q(IvalidWay1), .d(IWay1Out[2]), .wen(1'b1), .clk(clk), .rst(rst));
+dff IvalidWay2R(.q(IvalidWay2), .d(IWay2Out[2]), .wen(1'b1), .clk(clk), .rst(rst));
+dff IvalidWay3R(.q(IvalidWay3), .d(IWay3Out[2]), .wen(1'b1), .clk(clk), .rst(rst));
+dff IvalidWay4R(.q(IvalidWay4), .d(IWay4Out[2]), .wen(1'b1), .clk(clk), .rst(rst));
 
-wire [6:0] Itagv1, Itagv2;
-dff Itagv1R [6:0] (.q(Itagv1), .d(IWay1Out[7:1]), .wen(1'b1), .clk(clk), .rst(rst));
-dff Itagv2R [6:0] (.q(Itagv2), .d(IWay2Out[7:1]), .wen(1'b1), .clk(clk), .rst(rst));
+dff ILRUWay1R [1:0] (.q(ILRUWay1), .d(IWay1Out[1:0]), .wen(1'b1), .clk(clk), .rst(rst));
+dff ILRUWay2R [1:0] (.q(ILRUWay2), .d(IWay1Out[1:0]), .wen(1'b1), .clk(clk), .rst(rst));
+dff ILRUWay3R [1:0] (.q(ILRUWay3), .d(IWay1Out[1:0]), .wen(1'b1), .clk(clk), .rst(rst));
+dff ILRUWay4R [1:0] (.q(ILRUWay4), .d(IWay1Out[1:0]), .wen(1'b1), .clk(clk), .rst(rst));
+wire all_valid;
+assign all_valid = IvalidWay1 & IvalidWay2 & IvalidWay3 & IvalidWay4;
 
-assign IInMeta1 = IWriteWay1 ? {PC_val[15:10], 2'b10} : {Itagv1, 1'b1};
-assign IInMeta2 = IWriteWay2 ? {PC_val[15:10], 2'b10} : {Itagv2, 1'b1};
+//assign to first way always when it is invalid or when its LRU bits is 11
+assign IWriteWay1 = (Iwrite_tag_array) & (~IvalidWay1 | (all_valid & (&ILRUWay1))); 
+assign IWriteWay2 = (Iwrite_tag_array) & (~IvalidWay2&IvalidWay1 | (all_valid & (&ILRUWay2))); 
+assign IWriteWay3 = (Iwrite_tag_array) & (~IvalidWay3&IvalidWay1&IvalidWay2 | (all_valid & (&ILRUWay3))); 
+assign IWriteWay4 = (Iwrite_tag_array) & (~IvalidWay4&IvalidWay1&IvalidWay2&IvalidWay3 (all_valid & (&ILRUWay4))); 
+
+// assign IWriteWay1 = (Iwrite_tag_array) & (~IvalidWay1 | (IvalidWay1 & ILRUWay1 & IvalidWay2));
+// assign IWriteWay2 = (Iwrite_tag_array) & ~IWriteWay1;
+
+wire [6:0] Itagv1, Itagv2, Itagv3, Itagv4;
+dff Itagv1R [6:0] (.q(Itagv1), .d(IWay1Out[9:3]), .wen(1'b1), .clk(clk), .rst(rst));
+dff Itagv2R [6:0] (.q(Itagv2), .d(IWay2Out[9:3]), .wen(1'b1), .clk(clk), .rst(rst));
+dff Itagv3R [6:0] (.q(Itagv3), .d(IWay3Out[9:3]), .wen(1'b1), .clk(clk), .rst(rst));
+dff Itagv4R [6:0] (.q(Itagv4), .d(IWay4Out[9:3]), .wen(1'b1), .clk(clk), .rst(rst));
+
+wire[1:0]next_stored = (all_valid&IWriteWay1) ? IWay1Out[1:0]:
+                    (all_valid&IWriteWay2) ? IWay2Out[1:0]:
+                    (all_valid&IWriteWay3) ? IWay3Out[1:0]:
+                    (all_valid&IWriteWay4) ? IWay4Out[1:0]:
+                    z;
+
+wire[1:0] way1LRU,way2LRU,way3LRU,way4LRU;
+assign way1LRU = (IWay1Out[1:0]>=next_stored) ? IWay1Out[1:0]+1:
+                 IWay1Out[1:0];
+assign way2LRU = (IWay2Out[1:0]>=next_stored) ? IWay2Out[1:0]+1:
+                 IWay2Out[1:0];
+assign way3LRU = (IWay3Out[1:0]>=next_stored) ? IWay3Out[1:0]+1:
+                 IWay3Out[1:0];
+assign way4LRU = (IWay4Out[1:0]>=next_stored) ? IWay4Out[1:0]+1:
+                 IWay4Out[1:0];
+
+
+
+assign IInMeta1 = IWriteWay1 ? {PC_val[15:9], 3'b100} : {Itagv1, way1LRU};
+assign IInMeta2 = IWriteWay2 ? {PC_val[15:9], 3'b100} : {Itagv2, way2LRU};
+assign IInMeta3 = IWriteWay3 ? {PC_val[15:9], 3'b100} : {Itagv3, way3LRU};
+assign IInMeta4 = IWriteWay4 ? {PC_val[15:9], 3'b100} : {Itagv4, way4LRU};
+
+
+// assign IInMeta1 = IWriteWay1 ? {PC_val[15:10], 2'b10} : {Itagv1, 1'b1};
+// assign IInMeta2 = IWriteWay2 ? {PC_val[15:10], 2'b10} : {Itagv2, 1'b1};
 
 MetaDataArray IMeta1 (.clk(clk), .rst(rst), .DataIn(IInMeta1), .Write(Iwrite_tag_array), .BlockEnable(IBlockEn), .DataOut(IWay1Out));
 MetaDataArray IMeta2 (.clk(clk), .rst(rst), .DataIn(IInMeta2), .Write(Iwrite_tag_array), .BlockEnable(IBlockEn), .DataOut(IWay2Out));
-
+MetaDataArray IMeta3 (.clk(clk), .rst(rst), .DataIn(IInMeta3), .Write(Iwrite_tag_array), .BlockEnable(IBlockEn), .DataOut(IWay3Out));
+MetaDataArray IMeta4 (.clk(clk), .rst(rst), .DataIn(IInMeta4), .Write(Iwrite_tag_array), .BlockEnable(IBlockEn), .DataOut(IWay4Out));
+//change till here
 wire Imiss_detected, Imiss_detected1, Imiss_detected2;
 wire IWay1TagMatch, IWay2TagMatch;
 wire sameCycleMiss;
 assign sameCycleMiss = Imiss_detected & miss_detected;
 assign Icstall = Ifsm_busy | Imiss_detected | sameCycleMiss;
-assign Imiss_detected1 = (~IWay1TagMatch & ~IWay2TagMatch);
+assign Imiss_detected1 = (~IWay1TagMatch & ~IWay2TagMatch & ~IWay3TagMatch & ~IWay4TagMatch);
 dff ImissEdge (.q(Imiss_detected2), .d(Imiss_detected1), .wen(1'b1), .clk(clk), .rst(rst));
 assign Imiss_detected = Imiss_detected1 & ~Imiss_detected2;
 
 //Metadata Bits[7:2] are tag; Bit[1] is valid bit; Bit[0] is LRU bit :(
-assign IWay1TagMatch = (PC_val[15:10] == IWay1Out[7:2]) & IWay1Out[1] & ~Iwrite_tag_array;
-assign IWay2TagMatch = (PC_val[15:10] == IWay2Out[7:2]) & IWay2Out[1] & ~Iwrite_tag_array;
+assign IWay1TagMatch = (PC_val[15:9] == IWay1Out[9:3]) & IWay1Out[2] & ~Iwrite_tag_array;
+assign IWay2TagMatch = (PC_val[15:9] == IWay2Out[9:3]) & IWay2Out[2] & ~Iwrite_tag_array;
+assign IWay3TagMatch = (PC_val[15:9] == IWay3Out[9:3]) & IWay3Out[2] & ~Iwrite_tag_array;
+assign IWay4TagMatch = (PC_val[15:9] == IWay4Out[9:3]) & IWay4Out[2] & ~Iwrite_tag_array;
 
-wire Iway, ImatchWay;
-assign ImatchWay = (IWay1TagMatch) ? 1'b0 : 1'b1;
-assign Iway = Ifsm_busy ? ~(~IvalidWay1 | (IvalidWay1 & ILRUWay1 & IvalidWay2)): ImatchWay;
+wire [1:0]Iway, ImatchWay;
+assign ImatchWay = (IWay1TagMatch) ? 2'b00:
+                    (IWay2TagMatch)? 2'b01:
+                    (IWay3TagMatch)? 2'b10:
+                    2'b11;
+
+//assign Iway = Ifsm_busy ? ~(~IvalidWay1 | (IvalidWay1 & ILRUWay1 & IvalidWay2)): ImatchWay;//question
+assign Iway = ImatchWay;
 wire [7:0] ICacheWord;
 wire [127:0] ICBlockEn;
 wire [15:0] ICacheIn;
-seven_decode ISeD (.in({PC_val[9:4], Iway}), .out(ICBlockEn));
+seven_decode ISeD (.in({PC_val[8:4], Iway}), .out(ICBlockEn));
 assign ICacheWrite = Iwrite_data_array;
 assign ICacheWord = Ifsm_busy ? IMainWordEn : IPCWordEn;
 assign ICacheIn = mainMemOut;
